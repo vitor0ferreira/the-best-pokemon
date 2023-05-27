@@ -7,3 +7,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+abbr:hover::after {
+  content: attr(title);
+  position: absolute;
+  background-color: #000;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+}
