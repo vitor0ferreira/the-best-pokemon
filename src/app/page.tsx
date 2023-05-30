@@ -105,7 +105,7 @@ export default function Home() {
         </div>
       </div>
       <a 
-        href='' 
+        href='/ranking' 
         className='h-14 w-auto p-4 cursor-pointer flex items-center text-3xl font-bold rounded-md bg-white hover:scale-105 shadow-md'
         target='_self'
       >
