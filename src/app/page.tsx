@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { AiFillThunderbolt } from "react-icons/ai"
 import { FaDragon } from 'react-icons/fa'
@@ -11,7 +13,11 @@ export default function Home() {
       <div className='outline outline-6 outline-white bg-white rounded-xl w-[80%] h-[60vh] relative'>
         <ul className=' relative -top-14 left-0 w-full flex gap-3 min-h-max'>
           <li className='grow relative'>
-            <input id='allTimes_option' type='radio' name='date_choice' defaultChecked className='opacity-0 cursor-pointer peer w-full h-12 z-0 absolute top-0 left-0'/>
+            <input id='allTimes_option' type='radio' name='date_choice' defaultChecked
+              ref={input => {
+                if(input?.defaultChecked)
+                  input.checked = true
+              }} className='opacity-0 cursor-pointer peer w-full h-12 z-0 absolute top-0 left-0'/>
             <label htmlFor="allTimes_option" className='pb-2 z-15 cursor-pointer h-16 peer-checked:outline peer-checked:outline-6 peer-checked:outline-white rounded-t-md peer-checked:bg-white peer-checked:text-black bg-transparent text-white flex justify-center items-center transition-colors'>
               <div className='z-14 text-2xl font-bold'>
                 All Times

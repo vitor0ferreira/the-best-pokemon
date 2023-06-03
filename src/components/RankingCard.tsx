@@ -1,9 +1,19 @@
 import { useState, useEffect } from "react"
+import PokemonModal from "@/components/PokemonModal";
 
 export default function RankingCard(props:any) {
 
   const [pokemon, setPokemon] = useState<Object | any>({});
-  const [pokemonImage, setPokemonImage] = useState<string>('');
+  const [showModal, setShowModal] = useState<Boolean>(false)
+
+  const handleClick = (e:any) => {
+    setShowModal(!showModal)
+    if(e.target.parentElement.id != ''){
+      console.log(e.target.parentElement.id)
+    } else {
+      console.log(e.target.parentElement.parentElement.id)
+    }
+  }
   
   const pokemonFetch = async (pokemon:string) => {
     const pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
@@ -17,20 +27,23 @@ export default function RankingCard(props:any) {
   }, []);
 
   return (
-    <div className="w-full min-h-8 h-16 outline outline-black outline-2 cursor-pointer hover:opacity-80 flex">
-      <div className="h-full w-20 bg-black text-white flex items-center justify-center text-4xl font-bold">
-        {props.rank}
+    <>
+      <div id={pokemon.id ? pokemon.id : null} className="w-full min-h-8 h-16 outline outline-black outline-2 cursor-pointer hover:opacity-80 flex" onClick={(e)=> handleClick(e)}>
+        <div className="h-full w-20 bg-black text-white flex items-center justify-center text-4xl font-bold">
+          {props.rank}
+        </div>
+        <div className="flex-1 flex items-center justify-start pl-3 font-bold whitespace-nowrap text-white text-[2.5rem] bg-red-600 h-full overflow-hidden">
+          <abbr title={(pokemon.name ? pokemon.name.toUpperCase() : null)} className="no-underline">
+            {pokemon.name ? pokemon.name.toUpperCase() : null}
+          </abbr>
+        </div>
+        <div className="h-full w-20 p-1 flex items-center justify-center">
+          {pokemon.name ? (
+            <img src={pokemon.sprites.front_default} alt="pokemon photo" />
+          ) : null}
+        </div>
       </div>
-      <div className="flex-1 flex items-start justify-start pl-3 font-bold text-white text-[2.5rem] bg-red-600 h-full overflow-hidden">
-        <abbr title={(pokemon.name ? pokemon.name.toUpperCase() : null)} className="no-underline">
-          {pokemon.name ? pokemon.name.toUpperCase() : null}
-        </abbr>
-      </div>
-      <div className="h-full w-20 p-1 flex items-center justify-center">
-        {pokemon.name ? (
-          <img src={pokemon.sprites.front_default} alt="pokemon photo" />
-        ) : null}
-      </div>
-    </div>
+      {showModal && <PokemonModal pokemonData={pokemon} onclick={handleClick}/>}
+    </>
   );
 }
