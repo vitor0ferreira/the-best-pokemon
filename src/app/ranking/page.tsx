@@ -8,7 +8,7 @@ export default function Ranking() {
   return(
     <main className="bg-gradient-to-b from-red-600 to-red-900 flex flex-col items-center
     justify-evenly min-h-screen min-w-full">
-      <span className="text-[8rem] text-center text-white font-bold block">TOP RANKING</span>
+      <span className="text-8xl text-center text-white font-bold block">Top Ranking</span>
       <section id="rankings" className="flex w-full justify-around">
         <article className="bg-white h-max w-[30rem] rounded-2xl overflow-hidden border-[3px] border-black">
           <RankingCard rank='1'/>
