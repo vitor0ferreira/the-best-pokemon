@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import PokemonModal from "@/components/PokemonModal";
+import Image from "next/image";
 
 export default function RankingCard(props:any) {
 
@@ -39,7 +40,11 @@ export default function RankingCard(props:any) {
         </div>
         <div className="h-full w-20 p-1 flex items-center justify-center">
           {pokemon.name ? (
-            <img src={pokemon.sprites.front_default} alt="pokemon photo" />
+            <Image 
+              src={pokemon.sprites.front_default}
+              height={80}
+              width={80}
+              alt="pokemon photo" />
           ) : null}
         </div>
       </div>
