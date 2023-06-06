@@ -2,9 +2,7 @@
 
 import RankingCard from "@/components/RankingCard";
 
-
 export default function Ranking() {
-
 
   return(
     <main className="bg-gradient-to-b from-red-600 to-red-900 flex flex-col items-center
