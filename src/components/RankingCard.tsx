@@ -42,7 +42,7 @@ export default function RankingCard(props:any) {
         <div className="h-full w-20 bg-black text-white flex items-center justify-center text-4xl font-bold">
           {props.rank}
         </div>
-        <div className="flex-1 flex items-center justify-start pl-3 font-bold whitespace-nowrap text-white text-[2.5rem] bg-red-600 h-full overflow-hidden">
+        <div className="flex-1 flex items-center justify-start pl-3 font-bold whitespace-nowrap text-white text-[2.5rem] bg-gradient-to-b from-red-400 to-red-600 h-full overflow-hidden">
           <abbr title={(pokemon.name ? pokemon.name.toUpperCase() : null)} className="no-underline">
             {pokemon.name ? pokemon.name.toUpperCase() : null}
           </abbr>
