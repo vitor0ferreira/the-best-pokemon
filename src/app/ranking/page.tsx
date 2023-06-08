@@ -4,11 +4,13 @@ import RankingCard from "@/components/RankingCard";
 
 export default function Ranking() {
 
+  let availableVotes:number | null = 10
+
   return(
     <main className="bg-gradient-to-b from-red-500 to-red-800 flex flex-col items-center
-    justify-evenly min-h-screen min-w-full gap-4">
+    justify-center min-h-screen h-max min-w-full gap-5">
       <span className="text-8xl text-center text-white font-bold block">Top Ranking</span>
-      <span className="font-bold text-3xl text-yellow-400 block">Votos Disponíveis: 10</span>
+      <span className="font-bold text-3xl text-yellow-400 block">Remaining Votes: {availableVotes}</span>
       <section id="rankings" className="flex w-full gap-8 justify-center flex-wrap">
         <article className="bg-white h-max w-[30rem] rounded-2xl overflow-hidden border-[3px] border-black">
           <RankingCard rank='1'/>
@@ -52,7 +54,7 @@ export default function Ranking() {
         className='h-14 w-max p-4 cursor-pointer flex items-center text-3xl font-bold rounded-md bg-white hover:scale-105 shadow-md'
         target='_self'
       >
-        Voltar {'<-'}
+        Back {'<-'}
       </a>
     </main>
   )
