@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
-import PokemonModal from "@/components/modals/PokemonModal";
 import Image from "next/image";
+import { useState, useEffect, useContext } from "react"
+
+import PokemonModal from "@/components/modals/PokemonModal";
 import VoteCompletedModal from "./modals/VoteCompletedModal";
 
 export default function RankingCard(props:any) {
@@ -57,7 +58,12 @@ export default function RankingCard(props:any) {
           ) : null}
         </div>
       </div>
-      {showModal && <PokemonModal pokemonData={pokemon} onclick={handleClick} onyesclick={handleVote}/>}
+      {showModal && <PokemonModal pokemonData={pokemon} onclick={handleClick} 
+        onyesclick={()=>{
+          handleVote;
+          
+        }}
+      />}
       {showVotedModal && <VoteCompletedModal pokemonData={pokemon} onclick={handleVote}/>}
     </>
   );
