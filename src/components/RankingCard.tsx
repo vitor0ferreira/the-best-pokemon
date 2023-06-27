@@ -3,12 +3,14 @@ import { useState, useEffect, useContext } from "react"
 
 import PokemonModal from "@/components/modals/PokemonModal";
 import VoteCompletedModal from "./modals/VoteCompletedModal";
+import { VotesRemaining } from "@/contexts/RankingContext";
 
 export default function RankingCard(props:any) {
 
   const [pokemon, setPokemon] = useState<Object | any>({})
   const [showModal, setShowModal] = useState<Boolean>(false)
   const [showVotedModal, setShowVotedModal] = useState<Boolean>(false)
+  const [remainingVotes, setRemainingVotes] = useState(useContext(VotesRemaining))
 
   const handleClick = (e:any) => {
     setShowModal(!showModal)
@@ -19,11 +21,12 @@ export default function RankingCard(props:any) {
     }
   }
 
-  const handleVote = (e:any) => {
+  const handleVote = () => {
     if(showModal){
       setShowModal(false)
     }
     setShowVotedModal(!showVotedModal)
+    setRemainingVotes(remainingVotes - 1)
   }
   
   const pokemonFetch = async (pokemon:string) => {
@@ -60,8 +63,7 @@ export default function RankingCard(props:any) {
       </div>
       {showModal && <PokemonModal pokemonData={pokemon} onclick={handleClick} 
         onyesclick={()=>{
-          handleVote;
-          
+          handleVote()
         }}
       />}
       {showVotedModal && <VoteCompletedModal pokemonData={pokemon} onclick={handleVote}/>}
