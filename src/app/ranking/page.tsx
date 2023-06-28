@@ -1,18 +1,18 @@
 'use client'
-import { VotesRemaining } from "@/contexts/RankingContext";
+import { VotesContext, VotesProvider } from "@/contexts/RankingContext";
 import RankingCard from "@/components/RankingCard";
-import { createContext, useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 export default function Ranking() {
 
-  const availableVotes = useContext(VotesRemaining)
+  const { remainingVotes } = useContext(VotesContext)
 
   return(
       <main className="bg-gradient-to-b from-red-500 to-red-800 flex flex-col items-center
       justify-center min-h-screen h-max min-w-full gap-5">
-        <VotesRemaining.Provider value={availableVotes}>
+        <VotesProvider>
           <span className="text-8xl text-center text-white font-bold block">Top Ranking</span>
-          <span className="font-bold text-3xl text-yellow-400 block">Remaining Votes: {availableVotes}</span>
+          <span className="font-bold text-3xl text-yellow-400 block">Remaining Votes: {remainingVotes}</span>
           <section id="rankings" className="flex w-full gap-8 justify-center flex-wrap">
             <article className="bg-white h-max w-[30rem] rounded-2xl overflow-hidden border-[3px] border-black">
               <RankingCard rank='1'/>
@@ -58,7 +58,7 @@ export default function Ranking() {
           >
             Back {'<-'}
           </a>
-        </VotesRemaining.Provider>
+        </VotesProvider>
       </main>
   )
 }

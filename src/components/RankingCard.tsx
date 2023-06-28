@@ -3,14 +3,15 @@ import { useState, useEffect, useContext } from "react"
 
 import PokemonModal from "@/components/modals/PokemonModal";
 import VoteCompletedModal from "./modals/VoteCompletedModal";
-import { VotesRemaining } from "@/contexts/RankingContext";
+import { VotesContext } from "@/contexts/RankingContext";
 
 export default function RankingCard(props:any) {
 
   const [pokemon, setPokemon] = useState<Object | any>({})
   const [showModal, setShowModal] = useState<Boolean>(false)
   const [showVotedModal, setShowVotedModal] = useState<Boolean>(false)
-  const [remainingVotes, setRemainingVotes] = useState(useContext(VotesRemaining))
+  
+  const {remainingVotes, setRemainingVotes} = useContext(VotesContext)
 
   const handleClick = (e:any) => {
     setShowModal(!showModal)
