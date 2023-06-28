@@ -1,11 +1,33 @@
 'use client'
 import { VotesContext, VotesProvider } from "@/contexts/RankingContext";
 import RankingCard from "@/components/RankingCard";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import RankingArticle from "./components/RankingArticle";
 
 export default function Ranking() {
 
   const { remainingVotes } = useContext(VotesContext)
+  const [firePokemons, setFirePokemons] = useState()
+  const [waterPokemons, setWaterPokemons] = useState()
+  const [flyingPokemons, setFlyingPokemons] = useState()
+  const [isLoading, setIsLoading] = useState<Boolean>(true)
+  let temporaryData:any = []
+
+  const GetPokemonsOfType = async (pokemonType:string) => {
+      const fetchTypeResponse = await fetch(`https://pokeapi.co/api/v2/type/${pokemonType}`)
+      const fetchedData = await fetchTypeResponse.json()
+      temporaryData.push(fetchedData.pokemon)
+  }
+
+  useEffect(()=>{
+      GetPokemonsOfType('fire')
+      setFirePokemons(temporaryData[0])
+      GetPokemonsOfType('water')
+      setWaterPokemons(temporaryData[1])
+      GetPokemonsOfType('flying')
+      setFlyingPokemons(temporaryData[2])
+      setIsLoading(!isLoading)
+  },[])
 
   return(
       <main className="bg-gradient-to-b from-red-500 to-red-800 flex flex-col items-center
@@ -14,42 +36,9 @@ export default function Ranking() {
           <span className="text-8xl text-center text-white font-bold block">Top Ranking</span>
           <span className="font-bold text-3xl text-yellow-400 block">Remaining Votes: {remainingVotes}</span>
           <section id="rankings" className="flex w-full gap-8 justify-center flex-wrap">
-            <article className="bg-white h-max w-[30rem] rounded-2xl overflow-hidden border-[3px] border-black">
-              <RankingCard rank='1'/>
-              <RankingCard rank='2'/>
-              <RankingCard rank='3'/>
-              <RankingCard rank='4'/>
-              <RankingCard rank='5'/>
-              <RankingCard rank='6'/>
-              <RankingCard rank='7'/>
-              <RankingCard rank='8'/>
-              <RankingCard rank='9'/>
-              <RankingCard rank='10'/>
-            </article>
-            <article className="bg-white h-max w-[30rem] rounded-2xl overflow-hidden border-[3px] border-black">
-              <RankingCard rank='1'/>
-              <RankingCard rank='2'/>
-              <RankingCard rank='3'/>
-              <RankingCard rank='4'/>
-              <RankingCard rank='5'/>
-              <RankingCard rank='6'/>
-              <RankingCard rank='7'/>
-              <RankingCard rank='8'/>
-              <RankingCard rank='9'/>
-              <RankingCard rank='10'/>
-            </article>
-            <article className="bg-white h-max w-[30rem] rounded-2xl overflow-hidden border-[3px] border-black ">
-              <RankingCard rank='1'/>
-              <RankingCard rank='2'/>
-              <RankingCard rank='3'/>
-              <RankingCard rank='4'/>
-              <RankingCard rank='5'/>
-              <RankingCard rank='6'/>
-              <RankingCard rank='7'/>
-              <RankingCard rank='8'/>
-              <RankingCard rank='9'/>
-              <RankingCard rank='10'/>
-            </article>
+            {firePokemons ? <RankingArticle pokemonsList={firePokemons} /> : null}
+            {waterPokemons ? <RankingArticle pokemonsList={waterPokemons} /> : null}
+            {flyingPokemons ? <RankingArticle pokemonsList={flyingPokemons} /> : null}
           </section>
           <a
             href='/'
