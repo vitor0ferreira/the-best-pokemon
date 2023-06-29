@@ -11,22 +11,29 @@ export default function Ranking() {
   const [waterPokemons, setWaterPokemons] = useState()
   const [flyingPokemons, setFlyingPokemons] = useState()
   const [isLoading, setIsLoading] = useState<Boolean>(true)
-  let temporaryData:any = []
 
-  const GetPokemonsOfType = async (pokemonType:string) => {
+  const getPokemonsOfType = async (pokemonType:string) => {
       const fetchTypeResponse = await fetch(`https://pokeapi.co/api/v2/type/${pokemonType}`)
       const fetchedData = await fetchTypeResponse.json()
-      temporaryData.push(fetchedData.pokemon)
+      const pokemons = fetchedData.pokemon
+
+      return pokemons
   }
 
   useEffect(()=>{
-      GetPokemonsOfType('fire')
-      setFirePokemons(temporaryData[0])
-      GetPokemonsOfType('water')
-      setWaterPokemons(temporaryData[1])
-      GetPokemonsOfType('flying')
-      setFlyingPokemons(temporaryData[2])
-      setIsLoading(!isLoading)
+    
+    const fetchData = async () => {
+      const firePokemonsData = await getPokemonsOfType('fire');
+      const waterPokemonsData = await getPokemonsOfType('water');
+      const flyingPokemonsData = await getPokemonsOfType('flying');
+  
+      setFirePokemons(firePokemonsData);
+      setWaterPokemons(waterPokemonsData);
+      setFlyingPokemons(flyingPokemonsData);
+      setIsLoading(false);
+    };
+  
+    fetchData();
   },[])
 
   return(
@@ -36,9 +43,9 @@ export default function Ranking() {
           <span className="text-8xl text-center text-white font-bold block">Top Ranking</span>
           <span className="font-bold text-3xl text-yellow-400 block">Remaining Votes: {remainingVotes}</span>
           <section id="rankings" className="flex w-full gap-8 justify-center flex-wrap">
-            {firePokemons ? <RankingArticle pokemonsList={firePokemons} /> : null}
-            {waterPokemons ? <RankingArticle pokemonsList={waterPokemons} /> : null}
-            {flyingPokemons ? <RankingArticle pokemonsList={flyingPokemons} /> : null}
+            {!isLoading ? <RankingArticle pokemonsList={firePokemons} /> : null}
+            {!isLoading ? <RankingArticle pokemonsList={waterPokemons} /> : null}
+            {!isLoading ? <RankingArticle pokemonsList={flyingPokemons} /> : null}
           </section>
           <a
             href='/'

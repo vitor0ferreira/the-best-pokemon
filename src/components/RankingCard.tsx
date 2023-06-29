@@ -37,8 +37,7 @@ export default function RankingCard(props:any) {
   }
 
   useEffect(()=>{
-    let randomPokemon = (Math.round(Math.random()*600))
-    pokemonFetch('' + randomPokemon);
+    pokemonFetch(props.pokemon);
   }, []);
 
   return (
