@@ -5,14 +5,14 @@ export default function RankingArticle (props:any) {
   const pokemonsList = props.pokemonsList;
   let rank = 0;
 
-/*   if(pokemonsList){
+  if(pokemonsList){
     for (let i = pokemonsList.length -1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i+1));
       let k = pokemonsList[i];
       pokemonsList[i] = pokemonsList[j];
       pokemonsList[j] = k;
     }
-  } */
+  }
   console.log(pokemonsList[0].pokemon.name)
 
   return (

@@ -38,7 +38,7 @@ export default function RankingCard(props:any) {
 
   useEffect(()=>{
     pokemonFetch(props.pokemon);
-  }, []);
+  }, [props.pokemon]);
 
   return (
     <>
