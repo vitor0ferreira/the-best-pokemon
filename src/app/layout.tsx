@@ -16,8 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <aside className='absolute top-0 left-0 min-h-full min-w-[3%] from-amber-200 to-amber-400 bg-gradient-to-r'></aside>
-      <aside className='absolute top-0 right-0 min-h-full min-w-[3%] from-amber-200 to-amber-400 bg-gradient-to-l'></aside>
+        <div className="h-8 w-full bg-white">
+
+        </div>
+        <aside className='absolute top-0 left-0 min-h-full min-w-[3%] from-amber-200 to-amber-400 bg-gradient-to-r'></aside>
+        <aside className='absolute top-0 right-0 min-h-full min-w-[3%] from-amber-200 to-amber-400 bg-gradient-to-l'></aside>
         {children}
       </body>
     </html>

@@ -8,7 +8,7 @@ import { IoWaterSharp } from 'react-icons/io5'
 
 export default function Home() {
   return (
-    <main className='bg-gradient-to-b from-red-500 to-red-800 flex flex-col justify-around items-center gap-3 p-3 min-h-screen h-full min-w-full'>
+    <main className='bg-gradient-to-b from-red-500 to-red-800 flex flex-col justify-around items-center gap-3 p-3 min-h-screen h-max min-w-full'>
       <span className='font-bold text-white drop-shadow-sm text-8xl'>The Best Pokemon</span>
       <div className='outline outline-6 outline-white bg-white rounded-xl w-[80%] h-[60vh] relative'>
         <ul className=' relative -top-14 left-0 w-full flex gap-3 min-h-max'>

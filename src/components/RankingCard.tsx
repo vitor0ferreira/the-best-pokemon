@@ -52,7 +52,7 @@ export default function RankingCard(props:any) {
           </abbr>
         </div>
         <div className="h-full w-20 p-1 flex items-center justify-center">
-          {pokemon.name ? (
+          {pokemon.sprites?.front_default ? (
             <Image 
               src={pokemon.sprites.front_default}
               height={80}
