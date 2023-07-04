@@ -1,4 +1,4 @@
-import RankingCard from "@/components/RankingCard"
+import RankingCard from "@/app/ranking/components/RankingCard"
 
 export default function RankingArticle (props:any) {
   
@@ -13,14 +13,16 @@ export default function RankingArticle (props:any) {
       pokemonsList[j] = k;
     }
   }
-  console.log(pokemonsList[0].pokemon.name)
 
   return (
-    <article className="bg-white h-max max-h-[66vh] w-[30rem] rounded-2xl overflow-x-hidden overflow-y-scroll scroll border-[3px] border-black">
-      {pokemonsList.map((pokemon:any, index:any)=>{
-        rank++
-        return <RankingCard rank={rank} pokemon={pokemon.pokemon.name} key={index} />
-      })}
-    </article>
+    <div>
+      <span>{pokemonsList.name}</span>
+      <article className="bg-white h-max max-h-[66vh] w-[30rem] rounded-2xl overflow-x-hidden overflow-y-scroll border-[4px] border-black">
+        {pokemonsList.map((pokemon:any, index:any)=>{
+          rank++
+          return <RankingCard rank={rank} pokemon={pokemon.pokemon.name} key={index} />
+        })}
+      </article>
+    </div>
   )
 }

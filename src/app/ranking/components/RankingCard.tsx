@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState, useEffect, useContext } from "react"
 
 import PokemonModal from "@/components/modals/PokemonModal";
-import VoteCompletedModal from "./modals/VoteCompletedModal";
+import VoteCompletedModal from "@/components/modals/VoteCompletedModal";
 import { VotesContext } from "@/contexts/RankingContext";
 
 export default function RankingCard(props:any) {
@@ -58,7 +58,7 @@ export default function RankingCard(props:any) {
               height={80}
               width={80}
               alt="pokemon photo" />
-          ) : null}
+          ) : <span className="text-center font-bold">NO PHOTO</span>}
         </div>
       </div>
       {showModal && <PokemonModal pokemonData={pokemon} onclick={handleClick} 

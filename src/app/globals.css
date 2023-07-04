@@ -8,7 +8,12 @@
   box-sizing: border-box;
 }
 
-abbr:hover::after {
+body {
+  min-height: 100vh;
+  height: max-content;
+}
+
+abbr:hover::before {
   content: attr(title);
   position: absolute;
   background-color: #000;
@@ -16,4 +21,17 @@ abbr:hover::after {
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 14px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffbe26;
+  border-radius: 4px;
 }

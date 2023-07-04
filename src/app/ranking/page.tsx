@@ -1,6 +1,6 @@
 'use client'
 import { VotesContext, VotesProvider } from "@/contexts/RankingContext";
-import RankingCard from "@/components/RankingCard";
+import RankingCard from "@/app/ranking/components/RankingCard";
 import { useContext, useEffect, useState } from "react";
 import RankingArticle from "./components/RankingArticle";
 

@@ -16,11 +16,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="h-8 w-full bg-white">
-
+        <div className="h-14 w-full bg-white flex items-center justify-between px-12 py-4 text-2xl">
+          <span className='italic font-extrabold text-blue-800 text-4xl'><a href="">The Best Pokemon</a></span>
+          <nav className='flex gap-4 font-bold'>
+            <a href="/" className='hover:bg-red-600 hover:text-white p-2'>Home</a>
+            <a href="/ranking" className='hover:bg-red-600 hover:text-white p-2'>Rankings</a>
+            <a href="" className='hover:bg-red-600 hover:text-white p-2'>About</a>
+          </nav>
         </div>
-        <aside className='absolute top-0 left-0 min-h-full min-w-[3%] from-amber-200 to-amber-400 bg-gradient-to-r'></aside>
-        <aside className='absolute top-0 right-0 min-h-full min-w-[3%] from-amber-200 to-amber-400 bg-gradient-to-l'></aside>
         {children}
       </body>
     </html>
