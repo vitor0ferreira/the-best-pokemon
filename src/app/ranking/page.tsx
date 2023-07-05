@@ -38,17 +38,17 @@ export default function Ranking() {
 
   return(
       <main className="bg-gradient-to-b from-red-500 to-red-800 flex flex-col items-center
-      justify-center min-h-screen h-max min-w-full gap-5">
+      justify-around min-h-screen h-max min-w-full gap-5">
         <VotesContext.Provider value={{remainingVotes, setRemainingVotes}}>
           <Heading/>
           <section id="rankings" className="flex w-full gap-8 justify-center flex-wrap">
-            {!isLoading ? <RankingArticle pokemonsList={firePokemons} /> : null}
-            {!isLoading ? <RankingArticle pokemonsList={waterPokemons} /> : null}
-            {!isLoading ? <RankingArticle pokemonsList={flyingPokemons} /> : null}
+            {!isLoading ? <RankingArticle pokemonsList={firePokemons} name={'Fire'} /> : null}
+            {!isLoading ? <RankingArticle pokemonsList={waterPokemons} name={'Water'} /> : null}
+            {!isLoading ? <RankingArticle pokemonsList={flyingPokemons} name={'Flying'} /> : null}
           </section>
           <a
             href='/'
-            className='h-14 w-max p-4 cursor-pointer flex items-center text-3xl font-bold rounded-md bg-white hover:scale-105 shadow-md'
+            className='h-14 w-max p-4 mb-4 cursor-pointer flex items-center text-3xl font-bold rounded-md bg-white hover:scale-105 shadow-md'
             target='_self'
           >
             Back {'<-'}
