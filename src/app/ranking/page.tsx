@@ -1,12 +1,12 @@
 'use client'
-import { VotesContext, VotesProvider } from "@/contexts/RankingContext";
-import RankingCard from "@/app/ranking/components/RankingCard";
-import { useContext, useEffect, useState } from "react";
+import { VotesContext } from "@/contexts/RankingContext";
+import { useEffect, useState } from "react";
 import RankingArticle from "./components/RankingArticle";
+import Heading from "./components/Heading";
 
 export default function Ranking() {
 
-  const { remainingVotes } = useContext(VotesContext)
+  const [remainingVotes, setRemainingVotes] = useState(10)
   const [firePokemons, setFirePokemons] = useState()
   const [waterPokemons, setWaterPokemons] = useState()
   const [flyingPokemons, setFlyingPokemons] = useState()
@@ -39,9 +39,8 @@ export default function Ranking() {
   return(
       <main className="bg-gradient-to-b from-red-500 to-red-800 flex flex-col items-center
       justify-center min-h-screen h-max min-w-full gap-5">
-        <VotesProvider>
-          <span className="text-8xl text-center text-white font-bold block">Top Ranking</span>
-          <span className="font-bold text-3xl text-yellow-400 block">Remaining Votes: {remainingVotes}</span>
+        <VotesContext.Provider value={{remainingVotes, setRemainingVotes}}>
+          <Heading/>
           <section id="rankings" className="flex w-full gap-8 justify-center flex-wrap">
             {!isLoading ? <RankingArticle pokemonsList={firePokemons} /> : null}
             {!isLoading ? <RankingArticle pokemonsList={waterPokemons} /> : null}
@@ -54,7 +53,7 @@ export default function Ranking() {
           >
             Back {'<-'}
           </a>
-        </VotesProvider>
+        </VotesContext.Provider>
       </main>
   )
 }

@@ -27,7 +27,6 @@ export default function RankingCard(props:any) {
       setShowModal(false)
     }
     setShowVotedModal(!showVotedModal)
-    setRemainingVotes(remainingVotes - 1)
   }
   
   const pokemonFetch = async (pokemon:string) => {
@@ -64,6 +63,7 @@ export default function RankingCard(props:any) {
       {showModal && <PokemonModal pokemonData={pokemon} onclick={handleClick} 
         onyesclick={()=>{
           handleVote()
+          setRemainingVotes(remainingVotes - 1)
         }}
       />}
       {showVotedModal && <VoteCompletedModal pokemonData={pokemon} onclick={handleVote}/>}
