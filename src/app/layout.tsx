@@ -20,8 +20,8 @@ export default function RootLayout({
           <span className='italic font-extrabold text-blue-800 text-4xl'><a href="">The Best Pokemon</a></span>
           <nav className='flex gap-4 font-bold'>
             <a href="/" className='hover:bg-red-600 hover:text-white p-2'>Home</a>
+            <a href="/catalogue" className='hover:bg-red-600 hover:text-white p-2'>Catalogue</a>
             <a href="/ranking" className='hover:bg-red-600 hover:text-white p-2'>Rankings</a>
-            <a href="" className='hover:bg-red-600 hover:text-white p-2'>About</a>
           </nav>
         </div>
         {children}

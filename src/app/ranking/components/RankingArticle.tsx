@@ -18,9 +18,9 @@ export default function RankingArticle (props:any) {
     <div className="flex flex-col items-center justify-center">
       <span className="text-3xl italic font-extrabold rounded-t-2xl rounded-tl-2xl bg-black p-5 text-white">{props.name} Pokemons</span>
       <article className="bg-white flex flex-col justify-between h-fit max-h-[66vh] w-[30rem] rounded-2xl overflow-x-hidden overflow-y-scroll border-[4px] border-black">
-        {pokemonsList.map((pokemon:any, index:any)=>{
+        {pokemonsList.map((pokemon:any)=>{
           rank++
-          return <RankingCard rank={rank} pokemon={pokemon.pokemon.name} key={index} />
+          return <RankingCard rank={rank} pokemon={pokemon.pokemon.name} key={pokemon.pokemon.name} />
         })}
       </article>
     </div>
