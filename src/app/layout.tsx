@@ -16,12 +16,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="h-14 w-full bg-white flex items-center justify-between px-12 py-4 text-2xl">
-          <span className='italic font-extrabold text-blue-800 text-4xl'><a href="">The Best Pokemon</a></span>
-          <nav className='flex gap-4 font-bold'>
-            <a href="/" className='hover:bg-red-600 hover:text-white p-2'>Home</a>
-            <a href="/catalogue" className='hover:bg-red-600 hover:text-white p-2'>Catalogue</a>
-            <a href="/ranking" className='hover:bg-red-600 hover:text-white p-2'>Rankings</a>
+        <div className="h-max w-full bg-white flex items-center justify-center flex-col px-2 py-2 sm:flex-row sm:gap-4 md:justify-evenly xl:justify-between xl:px-10">
+          <span className='italic font-extrabold text-blue-800 text-2xl whitespace-nowrap sm:text-3xl'><a href="">The Best Pokemon</a></span>
+          <nav className='flex font-bold text-lg gap-1 md:text-xl'>
+            <a href="/" className='hover:bg-red-600 hover:text-white p-1 rounded-md'>Home</a>
+            <a href="/catalogue" className='hover:bg-red-600 hover:text-white p-1 rounded-md'>Catalogue</a>
+            <a href="/ranking" className='hover:bg-red-600 hover:text-white p-1 rounded-md'>Rankings</a>
           </nav>
         </div>
         {children}

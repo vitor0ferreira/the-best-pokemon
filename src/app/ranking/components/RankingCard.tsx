@@ -41,6 +41,8 @@ export default function RankingCard(props:any) {
 
   return (
     <>
+      {pokemon.sprites?.front_default ? (
+
       <div id={pokemon.id ? pokemon.id : null} className="w-full min-h-8 h-16 outline outline-black outline-2 cursor-pointer hover:opacity-80 flex" onClick={(e)=> handleClick(e)}>
         <div className="h-full w-20 bg-black text-white flex items-center justify-center text-4xl font-bold">
           {props.rank}
@@ -60,6 +62,9 @@ export default function RankingCard(props:any) {
           ) : <span className="text-center font-bold">NO PHOTO</span>}
         </div>
       </div>
+      
+      ) : null}
+      
       {showModal && <PokemonModal pokemonData={pokemon} onclick={handleClick} 
         onyesclick={()=>{
           handleVote()
