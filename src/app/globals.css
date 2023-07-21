@@ -21,6 +21,7 @@ abbr:hover::before {
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 14px;
+  font-weight:bold;
 }
 
 ::-webkit-scrollbar {
