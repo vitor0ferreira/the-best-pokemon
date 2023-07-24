@@ -2,6 +2,7 @@
 
 import {useState, useEffect} from 'react'
 import Image from 'next/image'
+import PokemonCardModal from './modals/PokemonCardModal'
 
 export default function PokemonCard ({name}:any) {
 
@@ -12,6 +13,7 @@ export default function PokemonCard ({name}:any) {
   }
 
   const [pokemonData, SetPokemonData] = useState<Pokemon>({id:'', name:'', sprites:{front_default:''}})
+  const [showModal, SetShowModal] = useState<Boolean>(false)
 
   async function fetchPokemonData() {
 
@@ -33,8 +35,8 @@ export default function PokemonCard ({name}:any) {
       }
     }
     setTimeout(() => {
-      alert(id)
-    }, 500);
+      SetShowModal(true);
+    }, 100);
   }
 
 
@@ -48,6 +50,7 @@ export default function PokemonCard ({name}:any) {
           alt='pokemon photo'
         /> : null}
       </abbr>
+      {showModal ? <PokemonCardModal/> : null}
     </div>
   )
 }
