@@ -9,6 +9,15 @@ module.exports = {
     extend: {
       boxShadow: {
         '3xl': '0 0 2rem -.4rem rgba(0, 0, 0, 0.5)',
+      },
+      animation: {
+        fadein: 'fadein 1s linear'
+      },
+      keyframes: {
+        fadein: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1}
+        }
       }
     },
   },

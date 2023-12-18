@@ -50,7 +50,7 @@ export default function PokemonCard ({name}:any) {
           /> : null}
         </abbr>
       </div>
-      {showModal && <PokemonCardModal pokemon={pokemonData} />}
+      {showModal && <PokemonCardModal pokemon={pokemonData} closeModal={()=>SetShowModal(false)} />}
     </>
   )
 }
