@@ -9,7 +9,7 @@ import { SiGhostery } from "react-icons/si";
 export default function DailyPokemon () {
 
   return (
-    <div className='flex w-full h-full rounded-xl bg-gradient-to-l from-pink-600 to-violet-600 justify-start p-6 absolute gap-4 top-0 animate-fadein'>
+    <div className='flex w-full h-full rounded-xl bg-gradient-to-l from-pink-600 to-violet-600 justify-start p-6 gap-4 top-0 animate-fadein'>
           <div className='grow gap-2 flex flex-col p-6 bg-white shadow-3xl rounded-lg '>
             <h1 className='font-bold text-[5rem] leading-tight italic text-center'>MEWTWO</h1>
             <h2 className='text-xl indent-8 text-justify bg-violet-200 italic px-4 py-2 rounded-md'>
@@ -73,9 +73,10 @@ export default function DailyPokemon () {
           </div>
           <Image
             id='daily_pokemon'
-            className='object-contain h-[auto] hover:scale-110 hover:cursor-pointer drop-shadow-[0_5px_5px_rgba(0,0,0,0.80)]'
+            className='flex max-h-[500px] hover:scale-110 hover:cursor-pointer drop-shadow-[0_5px_5px_rgba(0,0,0,0.80)]'
             src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/150.png'}
-            width={550}
+            style={{margin: 'auto'}}
+            width={500}
             height={500}
             alt='poke picture'
           />

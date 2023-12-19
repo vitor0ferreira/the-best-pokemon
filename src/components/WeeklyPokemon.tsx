@@ -7,7 +7,7 @@ import { IoWaterSharp } from 'react-icons/io5'
 export default function WeeklyPokemon () {
 
   return (
-    <div className='flex w-full h-full rounded-xl bg-gradient-to-l from-yellow-400 to-amber-700 justify-start p-6 absolute gap-4 top-0 animate-fadein'>
+    <div className='flex w-full h-full rounded-xl bg-gradient-to-l from-yellow-400 to-amber-700 justify-start p-6 gap-4 top-0 animate-fadein'>
           <div className='grow gap-2 flex flex-col p-6 bg-white shadow-3xl rounded-lg '>
             <h1 className='font-bold text-[5rem] leading-tight italic text-center'>ARCANINE</h1>
             <h2 className='text-xl indent-8 text-justify bg-red-200 italic px-4 py-2 rounded-md'>
