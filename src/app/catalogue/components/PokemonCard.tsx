@@ -1,6 +1,6 @@
 'use client'
 
-import {useState, useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import Image from 'next/image'
 import PokemonCardModal from './modals/PokemonCardModal'
 
@@ -15,7 +15,7 @@ export default function PokemonCard ({name}:any) {
   const [pokemonData, SetPokemonData] = useState<Pokemon>({id:'', name:'', sprites:{front_default:''}})
   const [showModal, SetShowModal] = useState<Boolean>(false)
 
-  async function fetchPokemonData() {
+  const fetchPokemonData = async () =>{
 
     const fetchData = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
     const result = await fetchData.json();
@@ -24,7 +24,8 @@ export default function PokemonCard ({name}:any) {
 
   useEffect(()=>{
     fetchPokemonData()
-  })
+  },[name])
+  
 
   const handleClick = (e:any) => {
     let id = e.target.id
