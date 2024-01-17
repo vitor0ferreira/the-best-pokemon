@@ -21,16 +21,18 @@ export default function Home() {
   return (
     <main className='bg-gradient-to-b from-red-500 to-red-800 flex flex-col items-center gap-4 min-h-screen h-max min-w-full'>
       
-      <span className='font-bold text-white drop-shadow-sm text-8xl my-4'>The Best Pokemon</span>
+      <span className='font-bold text-white italic drop-shadow-sm text-8xl mb-4 mt-10'>
+        The Best Pokemon
+      </span>
       
       {/* CTA Buttons */}
       <nav className='w-max h-max flex items-center justify-center gap-4'>
-        <a href="" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Know the Pokemons</a>
+        <a href="/catalogue" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Know the Pokemons</a>
         <a href="" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Create an Account</a>
       </nav>
 
       {/* Presentation Section */}
-      <section className='w-[80%] h-72 bg-white flex items-center justify-center'>
+      <section className='w-[80%] h-96 bg-white flex items-center justify-center'>
         Presentation
       </section>
 
@@ -97,23 +99,19 @@ export default function Home() {
         </ul>
         {/* Highlight Pokemon Card Selectioned */}
         <article id='pokemon_highlights_card' className='outline outline-6 outline-white bg-white rounded-xl w-full h-max z-10'>
-        {radioValue[selectedOption]}
+          {radioValue[selectedOption]}
         </article>
       </section>
 
       {/* Button to go to the rankings page */}
       <a 
         href='/ranking' 
-        className='h-14 w-auto p-4 cursor-pointer flex items-center text-3xl font-bold rounded-md bg-white hover:scale-105 shadow-md'
+        className='h-14 w-auto p-4 my-12 cursor-pointer flex items-center text-3xl font-bold rounded-md bg-white hover:scale-105 shadow-md'
         target='_self'
       >
         Go Vote
       </a>
 
-      {/* Footer */}
-      <footer className='w-full h-72 bg-white flex items-center justify-center'>
-        Footer
-      </footer>
     </main>
   )
 }
