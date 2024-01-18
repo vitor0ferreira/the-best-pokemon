@@ -1,5 +1,6 @@
 import './globals.css'
 import { Inter, Roboto } from 'next/font/google'
+import { FaSquareFacebook } from 'react-icons/'
 
 const inter = Inter({ subsets: ['latin'] })
 const roboto = Roboto({ subsets: ['latin'], weight: ['400','500','700','900']})

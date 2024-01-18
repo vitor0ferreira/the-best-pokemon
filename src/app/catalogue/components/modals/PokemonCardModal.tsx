@@ -10,7 +10,7 @@ export default function PokemonCardModal (props:any) {
       <div className="bg-white rounded-md h-max max-h-[90%] w-[60vw] overflow-y-auto fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-wrap items-start justify-center z-999 p-4">
 
         <Image 
-        src={pokemon.sprites.other.dream_world ? pokemon.sprites.other.dream_world.front_default : pokemon.sprites.front_default }
+        src={pokemon.sprites.other.dream_world.front_default ? pokemon.sprites.other.dream_world.front_default : pokemon.sprites.front_default }
         className="overflow-hidden p-2 h-full"
         height={500}
         width={500}
