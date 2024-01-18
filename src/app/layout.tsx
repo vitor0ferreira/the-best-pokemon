@@ -1,6 +1,6 @@
 import './globals.css'
 import { Inter, Roboto } from 'next/font/google'
-import { FaSquareFacebook } from 'react-icons/'
+import { FaSquareFacebook, FaInstagram, FaXTwitter } from 'react-icons/fa6'
 
 const inter = Inter({ subsets: ['latin'] })
 const roboto = Roboto({ subsets: ['latin'], weight: ['400','500','700','900']})
@@ -30,7 +30,7 @@ export default function RootLayout({
         </div>
         {children}
         {/* Footer */}
-        <footer className='w-full h-72 bg-white flex items-center justify-around'>
+        <footer className='w-full h-max py-10 bg-white flex items-start justify-around'>
 
           {/* Main Sections Navigation */}
           <nav className='flex flex-col gap-1'>
@@ -51,9 +51,11 @@ export default function RootLayout({
           {/* Social Links Navigation */}
           <nav className='flex flex-col gap-1'>
             <span className="mb-2 font-bold text-5xl">Follow Us</span>
-            <a href="" className='w-max rounded-md font-bold text-2xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>Facebook Logo</a>
-            <a href="" className='w-max rounded-md font-bold text-2xl text-slate-500 mt-2 p-2 hover:bg-slate-100 hover:text-slate-600'>Instagram Logo</a>
-            <a href="" className='w-max rounded-md font-bold text-2xl text-slate-500 mt-2 p-2 hover:bg-slate-100 hover:text-slate-600'>Twitter Logo</a>
+            <div className='flex gap-1 text-4xl'>
+              <a href="" className='w-max rounded-md hover:text-blue-600'><FaSquareFacebook className='w-full h-full'/></a>
+              <a href="" className='w-max rounded-md p-1 hover:bg-gradient-to-br from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] hover:text-white'><FaInstagram/></a>
+              <a href="" className='w-max rounded-md p-1 hover:bg-black hover:text-white'><FaXTwitter/></a>
+            </div>
           </nav>
 
         </footer>
