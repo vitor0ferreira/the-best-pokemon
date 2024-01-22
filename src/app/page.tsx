@@ -3,7 +3,9 @@
 import AllTimesPokemon from '@/components/AllTimesPokemon'
 import DailyPokemon from '@/components/DailyPokemon'
 import WeeklyPokemon from '@/components/WeeklyPokemon'
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
+
 
 export default function Home() {
   const [selectedOption, setSelectedOption] = useState('allTimes');
@@ -18,6 +20,8 @@ export default function Home() {
     console.log(selectedOption)
   };
 
+  const { data: session} = useSession()
+
   return (
     <main className='bg-gradient-to-b from-red-500 to-red-800 flex flex-col items-center gap-4 min-h-screen h-max min-w-full'>
       
@@ -28,7 +32,7 @@ export default function Home() {
       {/* CTA Buttons */}
       <nav className='w-max h-max flex items-center justify-center gap-4'>
         <a href="/catalogue" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Know the Pokemons</a>
-        <a href="" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Create an Account</a>
+        {session ? null : <a href="" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Sign In and Vote</a>}
       </nav>
 
       {/* Presentation Section */}

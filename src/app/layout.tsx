@@ -1,6 +1,8 @@
 import './globals.css'
 import { Inter, Roboto } from 'next/font/google'
 import { FaSquareFacebook, FaInstagram, FaXTwitter } from 'react-icons/fa6'
+import { getServerSession } from 'next-auth'
+import SessionProvider from '@/components/ServerProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 const roboto = Roboto({ subsets: ['latin'], weight: ['400','500','700','900']})
@@ -12,14 +14,18 @@ export const metadata = {
   description: 'A ranking project to determinate (democratically) the best pokemon of all times.',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+  const session = await getServerSession();
+
   return (
     <html lang="en">
       <body className={fontsClassnames}>
+        {/* Header */}
         <div className="h-max w-full bg-white flex items-center justify-center flex-col gap-1 px-2 py-2 sm:flex-row sm:gap-4 md:justify-evenly xl:justify-between xl:px-10">
           <span className='italic font-extrabold text-blue-800 mt-2 text-2xl whitespace-nowrap sm:text-3xl sm:mt-0 md:text-4xl lg:text-5xl'><a href="">The Best Pokemon</a></span>
           <nav className='flex font-semibold text-lg gap-4 md:text-xl lg:text-2xl xl:text-3xl'>
@@ -28,7 +34,9 @@ export default function RootLayout({
             <a href="/ranking" className='hover:bg-red-600 hover:text-white p-1 rounded-md'>Rankings</a>
           </nav>
         </div>
-        {children}
+        <SessionProvider session={session}>
+          {children}
+        </SessionProvider>
         {/* Footer */}
         <footer className='w-full h-max py-10 bg-white flex items-start justify-around'>
 
