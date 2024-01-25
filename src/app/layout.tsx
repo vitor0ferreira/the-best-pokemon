@@ -2,7 +2,7 @@ import './globals.css'
 import { Inter, Roboto } from 'next/font/google'
 import { FaSquareFacebook, FaInstagram, FaXTwitter } from 'react-icons/fa6'
 import { getServerSession } from 'next-auth'
-import SessionProvider from '@/components/ServerProvider'
+import SessionProvider from '@/contexts/ServerProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 const roboto = Roboto({ subsets: ['latin'], weight: ['400','500','700','900']})
