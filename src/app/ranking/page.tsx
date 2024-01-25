@@ -23,14 +23,19 @@ export default function Ranking() {
   useEffect(()=>{
     
     const fetchData = async () => {
-      const firePokemonsData = await getPokemonsOfType('fire');
-      const waterPokemonsData = await getPokemonsOfType('water');
-      const flyingPokemonsData = await getPokemonsOfType('flying');
-  
-      setFirePokemons(firePokemonsData);
-      setWaterPokemons(waterPokemonsData);
-      setFlyingPokemons(flyingPokemonsData);
-      setIsLoading(false);
+
+      await Promise.all([
+        getPokemonsOfType('fire'),
+        getPokemonsOfType('water'),
+        getPokemonsOfType('flying')
+      ]).then((groupsOfPokemons)=>{
+        setFirePokemons(groupsOfPokemons[0]);
+        setWaterPokemons(groupsOfPokemons[1]);
+        setFlyingPokemons(groupsOfPokemons[2]);
+        setIsLoading(false);
+      });
+      
+      
     };
   
     fetchData();

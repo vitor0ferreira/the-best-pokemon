@@ -1,4 +1,3 @@
-'use client'
 import Image from "next/image"
 
 export default function PokemonCardModal (props:any) {
@@ -7,7 +6,7 @@ export default function PokemonCardModal (props:any) {
   return (
     <>
       <div id="bg" className="fixed inset-0 bg-black/30 z-auto" onClick={props.closeModal}></div>  
-      <div className="bg-white rounded-md h-max max-h-[90%] w-[60vw] overflow-y-auto fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-wrap items-start justify-center z-999 p-4">
+      <div className="bg-white rounded-xl shadow-black shadow-3xl h-max max-h-[90%] w-[60vw] overflow-y-auto fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-wrap items-start justify-center z-999 p-4">
 
         <Image 
         src={pokemon.sprites.other.dream_world.front_default ? pokemon.sprites.other.dream_world.front_default : pokemon.sprites.front_default }
