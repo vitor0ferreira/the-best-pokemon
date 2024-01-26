@@ -30,7 +30,7 @@ export default function Catalogue () {
 
       <input
         type="text"
-        placeholder="Pesquise um pokemon..."
+        placeholder="Type a pokemon name..."
         className="p-2 text-lg mt-4 rounded-sm focus:outline-none focus:placeholder:invisible"
         value={searchValue}
         onChange={(e)=>setSearchValue(e.target.value)}
