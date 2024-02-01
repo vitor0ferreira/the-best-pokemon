@@ -53,7 +53,7 @@ export default function Ranking() {
           </section>
           <a
             href='/'
-            className='h-14 w-max p-4 mb-4 cursor-pointer flex items-center text-3xl font-bold rounded-md bg-white hover:scale-105 shadow-md'
+            className='h-14 w-max p-4 my-10 cursor-pointer flex items-center text-3xl font-bold rounded-md bg-white hover:scale-105 shadow-md'
             target='_self'
           >
             Back {'<-'}

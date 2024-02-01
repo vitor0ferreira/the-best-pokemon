@@ -2,6 +2,7 @@
 import { MdCatchingPokemon } from "react-icons/md";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { getSession, signIn } from "next-auth/react";
+import { GetServerSideProps } from "next";
 
 
 export const getServerSideProps: GetServerSideProps = async ({req}) => {
@@ -10,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
   if(session){
     return {
       redirect: {
-        destination: '/catalogue',
+        destination: '/app',
         permanent: false,
       }
     }

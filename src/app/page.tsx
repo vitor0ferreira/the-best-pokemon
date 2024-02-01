@@ -3,6 +3,7 @@
 import AllTimesPokemon from '@/components/AllTimesPokemon'
 import DailyPokemon from '@/components/DailyPokemon'
 import WeeklyPokemon from '@/components/WeeklyPokemon'
+import { FaVoteYea } from "react-icons/fa";
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 
@@ -33,7 +34,10 @@ export default function Home() {
       <nav className='w-max h-max flex items-center justify-center gap-4'>
         <a href="/catalogue" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Know the Pokemons</a>
         {session ? 
-          <a href="/ranking" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Go Vote</a>
+          <a href="/ranking" className='h-14 w-auto p-4 cursor-pointer flex items-center gap-2 text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>
+            <FaVoteYea/>
+            Go Vote
+          </a>
            : 
           <a href="/login" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Sign In and Vote</a>}
       </nav>
