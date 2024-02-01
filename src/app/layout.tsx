@@ -38,7 +38,7 @@ export default async function RootLayout({
           {children}
         </SessionProvider>
         {/* Footer */}
-        <footer className='w-full h-max py-10 bg-white flex items-start justify-around'>
+        <footer className='w-full h-max py-10 bg-white flex flex-wrap items-start justify-around border-t-4 border-gray-400'>
 
           {/* Main Sections Navigation */}
           <nav className='flex flex-col gap-1'>

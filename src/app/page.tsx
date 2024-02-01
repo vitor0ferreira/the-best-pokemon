@@ -35,7 +35,7 @@ export default function Home() {
         {session ? 
           <a href="/ranking" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Go Vote</a>
            : 
-          <a href="/api/auth/signin/github" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Sign In and Vote</a>}
+          <a href="/login" className='h-14 w-auto p-4 cursor-pointer flex items-center text-2xl font-bold rounded-md bg-white hover:scale-105 shadow-md'>Sign In and Vote</a>}
       </nav>
 
       {session && 
