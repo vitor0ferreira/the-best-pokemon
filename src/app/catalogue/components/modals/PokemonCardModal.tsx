@@ -24,7 +24,7 @@ export default function PokemonCardModal (props:any) {
           <section className="text-3xl font-bold flex flex-wrap justify-start items-center my-2">
             Abilities:
           {pokemon.abilities.map((ability:any)=>{
-            return <p className="font-semibold text-lg flex justify-center p-1 rounded-sm bg-emerald-600 text-white m-1 flex-auto" key={ability.ability.url}>
+            return <p className="font-semibold text-lg flex justify-center py-1 px-1.5 rounded-sm bg-emerald-600 text-white m-1 flex-auto" key={ability.ability.url}>
               {ability.ability.name.toUpperCase()}</p>
           })}
           </section>
@@ -33,7 +33,7 @@ export default function PokemonCardModal (props:any) {
           <section className="text-3xl font-bold flex flex-wrap justify-start items-center my-2">
             Stats:
             {pokemon.stats.map((stats:any)=>{
-              return <p className="font-semibold text-lg flex justify-center p-2 rounded-sm bg-red-600 text-white m-1" key={stats.stat.url}>
+              return <p className="font-semibold text-lg flex justify-center py-1 px-1.5 rounded-sm bg-red-600 text-white m-1" key={stats.stat.url}>
               {stats.stat.name.toUpperCase()}: {stats.base_stat}</p>
             })}
           </section>

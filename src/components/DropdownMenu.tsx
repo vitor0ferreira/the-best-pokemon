@@ -53,7 +53,7 @@ export default function DropdownMenu () {
               <li className="py-2 px-4 hover:bg-gray-100 text-lg">Hi, {user.name}</li>
               <li className="py-2 px-4 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
                 <RiAccountBoxFill/>
-                Profile
+                <a href="/profile">Profile</a>
               </li>
               <li className="py-2 px-4 hover:bg-gray-100 flex items-center gap-2 cursor-pointer" onClick={logout}>
                 <TbLogout2/>

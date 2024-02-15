@@ -44,9 +44,6 @@ export default function Catalogue () {
           }).map((pokemon:Pokemon)=>{
             return (<PokemonCard name={pokemon.name} key={pokemon.name} />)
           })}
-        {/* {pokemons.map((pokemon:Pokemon)=>{
-          return <PokemonCard name={pokemon.name} key={pokemon.name} />
-        })} */}
       </section>
       <button className="bg-white flex p-2 text-lg font-bold rounded-md cursor-pointer hover:scale-105 mb-6" 
       onClick={() => {setOffset((prevOffset)=> prevOffset + 100)

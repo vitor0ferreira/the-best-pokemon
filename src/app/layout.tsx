@@ -43,33 +43,46 @@ export default async function RootLayout({
         {children}
 
         {/* Footer */}
-        <footer className='w-full h-max py-10 bg-white flex flex-wrap items-start justify-around border-t-4 border-gray-300'>
+        <footer className='w-full h-max py-10 px-14 bg-white flex flex-wrap items-start justify-start gap-12 border-t-4 border-gray-300'>
 
           {/* Main Sections Navigation */}
           <nav className='flex flex-col gap-1'>
-            <span className="mb-2 font-bold text-5xl">The Best Pokemon</span>
-            <a href="" className='w-max rounded-md font-bold text-2xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>Home</a>
-            <a href="" className='w-max rounded-md font-bold text-2xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>Catalogue</a>
-            <a href="" className='w-max rounded-md font-bold text-2xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>Rankings</a>
+            <span className="mb-2 font-bold text-3xl">The Best Pokemon</span>
+            <a href="" className='w-max rounded-md font-bold text-xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>Home</a>
+            <a href="" className='w-max rounded-md font-bold text-xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>Catalogue</a>
+            <a href="" className='w-max rounded-md font-bold text-xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>Rankings</a>
           </nav>
 
           {/* Company Navigation */}
           <nav className='flex flex-col gap-1'>
-            <span className="mb-2 font-bold text-5xl">Company</span>
-            <a href="" className='w-max rounded-md font-bold text-2xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>About Us</a>
-            <a href="" className='w-max rounded-md font-bold text-2xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>Contact</a>
-            <a href="" className='w-max rounded-md font-bold text-2xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>Work with us</a>
+            <span className="mb-2 font-bold text-3xl">Company</span>
+            <a href="" className='w-max rounded-md font-bold text-xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>About Us</a>
+            <a href="" className='w-max rounded-md font-bold text-xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>Contact</a>
+            <a href="" className='w-max rounded-md font-bold text-xl text-slate-500 mt-2 p-2 hover:bg-red-400 hover:text-white'>Work with us</a>
           </nav>
 
           {/* Social Links Navigation */}
           <nav className='flex flex-col gap-1'>
-            <span className="mb-2 font-bold text-5xl">Follow Us</span>
+            <span className="mb-2 font-bold text-3xl">Follow Us</span>
             <div className='flex gap-1 text-4xl'>
               <a href="" className='w-max rounded-md hover:text-blue-600'><FaSquareFacebook className='w-full h-full'/></a>
               <a href="" className='w-max rounded-md p-1 hover:bg-gradient-to-br from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] hover:text-white'><FaInstagram/></a>
               <a href="" className='w-max rounded-md p-1 hover:bg-black hover:text-white'><FaXTwitter/></a>
             </div>
           </nav>
+
+          <div className='w-64 h-64 rounded-sm flex items-center justify-center bg-slate-400'>
+            QR CODE
+          </div>
+
+          <div className='bg-slate-800 flex flex-col flex-1 justify-start items-center flex-wrap p-4 gap-4 h-64 text-2xl text-slate-100 font-medium rounded-md'>
+            <span>Sign our Newsletter to receive weekly news and promos.</span>
+            <form className='w-full h-min flex items-center gap-3 border-b-4 border-slate-200 pb-6'>
+              <label htmlFor="email_input">E-mail</label>
+              <input type="email" id='email_input' className='p-1 rounded-sm h-min focus:outline-none focus:bg-slate-50 text-slate-900'/>
+            </form>
+            <span className='text-base font-thin overflow-hidden text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, error consequuntur modi aperiam molestias nam fuga veniam excepturi quam laborum? Accusamus sit harum dolore? Quo similique ipsa nemo culpa animi!</span>
+          </div>
 
         </footer>
         </SessionProvider>
