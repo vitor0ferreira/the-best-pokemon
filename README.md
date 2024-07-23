@@ -14,5 +14,5 @@ How to run it:
 > GITHUB_SECRET="123456789ABCDEFGHIJK"
 
 4 - Also add "NEXTAUTH_URL" and "NEXTAUTH_SECRET" variables in the same .env file to allow the NextAuth to work properly.  
-> NEXTAUTH_URL="your app address"
+> NEXTAUTH_URL="your app address"  
 > NEXTAUTH_SECRET="a encrypted key to be used in the authentication process.
