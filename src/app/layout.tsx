@@ -30,7 +30,7 @@ export default async function RootLayout({
         {/* Header */}
         <div className="h-max w-full bg-white flex items-center justify-center flex-col gap-1 px-2 py-2 sm:flex-row sm:gap-4 md:justify-evenly xl:justify-between xl:px-10">
           <span className='italic font-extrabold text-red-600 mt-2 text-2xl whitespace-nowrap sm:text-3xl sm:mt-0 md:text-4xl lg:text-5xl'>
-            <a href="">The Best Pokemon</a>
+            <a href="/">The Best Pokemon</a>
           </span>
           <nav className='flex items-center font-semibold text-lg gap-1 sm:gap-2 sm:text-xl md:text-2xl'>
             <a href="/" className='hover:bg-red-600 hover:text-white p-1 md:p-2 rounded-md'>Home</a>
@@ -75,14 +75,7 @@ export default async function RootLayout({
             QR CODE
           </div>
 
-          <div className='bg-slate-800 flex flex-col flex-1 justify-start items-center flex-wrap p-4 gap-4 h-64 text-2xl text-slate-100 font-medium rounded-md'>
-            <span>Sign our Newsletter to receive weekly news and promos.</span>
-            <form className='w-full h-min flex items-center gap-3 border-b-4 border-slate-200 pb-6'>
-              <label htmlFor="email_input">E-mail</label>
-              <input type="email" id='email_input' className='p-1 rounded-sm h-min focus:outline-none focus:bg-slate-50 text-slate-900'/>
-            </form>
-            <span className='text-base font-thin overflow-hidden text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, error consequuntur modi aperiam molestias nam fuga veniam excepturi quam laborum? Accusamus sit harum dolore? Quo similique ipsa nemo culpa animi!</span>
-          </div>
+          
 
         </footer>
         </SessionProvider>

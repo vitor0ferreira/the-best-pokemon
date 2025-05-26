@@ -3,6 +3,11 @@
 import { useEffect, useState } from "react";
 import PokemonCard from "./components/PokemonCard";
 
+interface Pokemon {
+  name: string;
+  url: string
+}
+
 export default function Catalogue () {
   
   const [searchValue, setSearchValue] = useState('')
@@ -20,10 +25,6 @@ export default function Catalogue () {
     FetchPokemons()
   },[offset])
 
-  interface Pokemon {
-    name: string;
-    url: string
-  }
 
   return (
     <main className="bg-red-600 min-h-screen flex flex-col items-center justify-start p-4 gap-10">
