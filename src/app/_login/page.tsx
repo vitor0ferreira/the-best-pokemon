@@ -6,13 +6,14 @@ import { GetServerSideProps } from "next";
 
 
 export const getServerSideProps: GetServerSideProps = async ({req}) => {
+
   const session = await getSession({req})
   
   if(session){
     return {
       redirect: {
-        destination: '/app',
-        permanent: false,
+        destination: '/',
+        permanent: true,
       }
     }
   }
@@ -25,12 +26,12 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
 export default function Login () {
 
   const GithubSignIn = () => {
-    signIn('github')
+    signIn('github', { callbackUrl: '/' })
   }
 
   return (
-    <main className="bg-white min-h-screen h-screen w-full flex items-center justify-center bg-[url('https://images6.alphacoders.com/744/744921.png')] bg-center bg-contain">
-      <section className="bg-slate-100/80 backdrop-blur-md drop-shadow-2xl rounded-md p-6">
+    <main className="bg-white min-h-screen h-screen w-full flex items-center justify-center bg-[url('https://images6.alphacoders.com/744/744921.png')] bg-bottom md:bg-center bg-contain bg-no-repeat">
+      <section className="bg-slate-100/70 backdrop-blur-md drop-shadow-2xl rounded-md p-6">
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <MdCatchingPokemon className="h-20 w-auto m-auto"/>
