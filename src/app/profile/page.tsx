@@ -2,9 +2,9 @@
 export default function Profile() {
 
   return (
-    <div className="min-h-[42rem] w-full bg-red-50 flex">
+    <main className="min-h-screen w-full bg-red-50 flex flex-col">
 
-      <aside className="w-min bg-slate-700 text-slate-200 p-5 flex flex-col items-center gap-4">
+      <aside className="w-full bg-slate-700 text-slate-200 p-5 flex items-center gap-4">
         <div className="w-44 aspect-square bg-slate-400 rounded-full"/>
         <span className="font-bold text-xl">Name</span>
         <div className="flex flex-col items-center gap-2 bg-slate-800 p-4 font-medium">
@@ -27,6 +27,6 @@ export default function Profile() {
         <article className="bg-slate-100 w-full h-full text-black flex items-center justify-center">Most Voted Generation</article>
       </section>
 
-    </div>
+    </main>
   )
 }

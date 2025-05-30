@@ -8,7 +8,7 @@ export default function VoteCompletedModal (props:any) {
           <span className="text-4xl font-bold flex flex-col items-center gap-2">
             YOU VOTED IN:
             <span className="text-6xl text-green-600">
-              {props.pokemonData.name.toUpperCase()}
+              {props.pokemonData.toUpperCase()}
             </span>
           </span>
         </div>

@@ -3,6 +3,7 @@ import { VotesContext } from "@/contexts/RankingContext";
 import { useEffect, useState } from "react";
 import RankingArticle from "./components/RankingArticle";
 import Heading from "./components/Heading";
+import Link from "next/link";
 
 export default function Ranking() {
 
@@ -10,6 +11,8 @@ export default function Ranking() {
   const [firePokemons, setFirePokemons] = useState()
   const [waterPokemons, setWaterPokemons] = useState()
   const [flyingPokemons, setFlyingPokemons] = useState()
+  
+  const arrayOfTypes = Array.of(firePokemons, waterPokemons, flyingPokemons)
   const [isLoading, setIsLoading] = useState<Boolean>(true)
 
   const getPokemonsOfType = async (pokemonType:string) => {
@@ -32,7 +35,8 @@ export default function Ranking() {
         setFirePokemons(groupsOfPokemons[0]);
         setWaterPokemons(groupsOfPokemons[1]);
         setFlyingPokemons(groupsOfPokemons[2]);
-        setIsLoading(false);
+      }).finally(()=>{
+        setIsLoading(false)
       });
       
       
@@ -47,17 +51,15 @@ export default function Ranking() {
         <VotesContext.Provider value={{remainingVotes, setRemainingVotes}}>
           <Heading/>
           <section id="rankings" className="flex w-full gap-8 justify-center flex-wrap">
-            {!isLoading ? <RankingArticle pokemonsList={firePokemons} name={'Fire'} /> : null}
-            {!isLoading ? <RankingArticle pokemonsList={waterPokemons} name={'Water'} /> : null}
-            {!isLoading ? <RankingArticle pokemonsList={flyingPokemons} name={'Flying'} /> : null}
+            {isLoading == false && arrayOfTypes.map((list, index)=> { return <RankingArticle pokemonsList={list} key={index+10} index={index} /> })}
           </section>
-          <a
+          <Link
             href='/'
             className='h-14 w-max p-4 my-10 cursor-pointer flex items-center text-3xl font-bold rounded-md bg-white hover:scale-105 shadow-md'
             target='_self'
           >
             Back {'<-'}
-          </a>
+          </Link>
         </VotesContext.Provider>
       </main>
   )

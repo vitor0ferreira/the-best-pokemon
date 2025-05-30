@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { RiAccountBoxFill } from "react-icons/ri";
@@ -13,6 +13,15 @@ interface User {
 };
 
 export default function DropdownMenu () {
+
+  useEffect(()=>{
+    if(typeof window != undefined){
+      document.body.addEventListener("click", ()=>{
+        setIsOpen(false)
+      })
+  }
+  })
+  
 
   const [isOpen, setIsOpen] = useState(false);
   const user:User = {name:'', image:'', email:''}
@@ -33,11 +42,12 @@ export default function DropdownMenu () {
   }
 
   return (
-    <div className="relative inline-block">
-      <div className="cursor-pointer rounded-full h-10 w-10" onClick={toggleDropdown}>
+    <div className="ml-2 relative inline-block z-[999]">
+      <div className="cursor-pointer rounded-full h-10 w-10 relative hover:ring-2 ring-red-200 hover:brightness-75" onClick={toggleDropdown}>
         {status == 'authenticated' && user.image ? (<Image
           src={user.image}
           fill
+          sizes='(max-width: 768px) 100vw'
           alt='user photo'
           className='rounded-full'
         />) : <IoPersonCircleSharp color='black' className='w-full h-full'/>}
