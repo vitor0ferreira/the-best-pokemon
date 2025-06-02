@@ -2,6 +2,7 @@
 
 import { FaVoteYea } from "react-icons/fa";
 import { useSession } from 'next-auth/react'
+import Link from "next/link";
 
 
 export default function Home() {
@@ -17,14 +18,14 @@ export default function Home() {
       
       {/* CTA Buttons */}
       <nav className='w-max h-max flex items-center justify-center gap-4'>
-        <a href="/catalogue" className='h-auto w-auto p-2 cursor-pointer flex items-center text-lg md:text-2xl md:px-4 font-bold rounded-md bg-white hover:scale-105 shadow-md'>Pokedéx</a>
+        <Link href="/catalogue" className='h-auto w-auto p-2 cursor-pointer flex items-center text-lg md:text-2xl md:px-4 font-bold rounded-md bg-white hover:scale-105 shadow-md'>Pokedéx</Link>
         {session ? 
-          <a href="/ranking" className='h-auto w-auto p-2 cursor-pointer flex items-center gap-2 text-lg md:text-2xl md:px-4 font-bold rounded-md bg-white hover:scale-105 shadow-md'>
+          <Link href="/ranking" className='h-auto w-auto p-2 cursor-pointer flex items-center gap-2 text-lg md:text-2xl md:px-4 font-bold rounded-md bg-white hover:scale-105 shadow-md'>
             <FaVoteYea/>
             Go Vote
-          </a>
+          </Link>
            : 
-          <a href="/login" className='h-auto w-auto p-2 cursor-pointer flex items-center text-lg md:text-2xl md:px-4 font-bold rounded-md bg-white hover:scale-105 shadow-md'>Sign In and Vote</a>}
+          <Link href="/login" className='h-auto w-auto p-2 cursor-pointer flex items-center text-lg md:text-2xl md:px-4 font-bold rounded-md bg-white hover:scale-105 shadow-md'>Sign In and Vote</Link>}
       </nav>
 
       {session && 
@@ -46,13 +47,13 @@ export default function Home() {
       </section>
 
       {/* Button to go to the rankings page */}
-      <a 
+      <Link 
         href='/ranking' 
         className='h-14 w-auto p-4 my-12 cursor-pointer flex items-center text-3xl font-bold rounded-md bg-white hover:scale-105 shadow-md'
         target='_self'
       >
         Go Vote
-      </a>
+      </Link>
 
     </main>
   )

@@ -1,32 +1,27 @@
 'use client'
 import { MdCatchingPokemon } from "react-icons/md";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { getSession, signIn } from "next-auth/react";
-import { GetServerSideProps } from "next";
-
-
-export const getServerSideProps: GetServerSideProps = async ({req}) => {
-
-  const session = await getSession({req})
-  
-  if(session){
-    return {
-      redirect: {
-        destination: '/',
-        permanent: true,
-      }
-    }
-  }
-
-  return {
-    props: {}
-  }
-}
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Login () {
 
+  const { data: session, status } = useSession(); 
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === 'authenticated' && session) {
+      router.push('/');
+    }
+  }, [session, status, router]);
+
   const GithubSignIn = () => {
-    signIn('github', { callbackUrl: '/' })
+    signIn('github', { callbackUrl: '/' });
+  }
+
+  if (status === 'loading') {
+    return <p>Loading...</p>;
   }
 
   return (
@@ -42,6 +37,7 @@ export default function Login () {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" action="#" method="POST">
+            {/* Campos de Email e Senha */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -92,6 +88,7 @@ export default function Login () {
           </form>
         </div>
 
+        {/* Botões de Sign in com OAuth */}
         <div className="inline-flex items-center justify-center w-full my-8">
             <h3 className="text-center text-base font-semibold text-slate-600 px-2 absolute -translate-x-1/2 left-1/2">
               Or continue with

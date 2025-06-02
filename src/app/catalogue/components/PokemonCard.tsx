@@ -2,11 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface CardProps {
-  name: string
+  name: string,
+  id: number
 }
 
-export default function PokemonCard({ name }: CardProps) {
-  const POKEMON_IMAGE_URL = `https://img.pokemondb.net/artwork/large/${name}.jpg`;
+export default function PokemonCard({ name, id }: CardProps) {
+
+  const POKEMON_IMAGE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
 
   return (
     <Link
@@ -20,6 +22,7 @@ export default function PokemonCard({ name }: CardProps) {
         fill
         alt="pokemon photo"
         className="mix-blend-multiply p-2 object-contain"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
     </Link>
   );
