@@ -1,6 +1,5 @@
 # The Best Pokémon
 
-![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-blue.svg)
 ![Status](https://img.shields.io/badge/status-Em%20Desenvolvimento-yellow.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-15.3.2-black?logo=next.js)
 ![React](https://img.shields.io/badge/React-19.1.0-blue?logo=react)
@@ -112,7 +111,7 @@ Certifique-se de ter os seguintes softwares instalados:
 
 ---
 
-## Usage
+## Utilização
 
 Após a instalação e configuração, você pode rodar a aplicação:
 
@@ -151,7 +150,3 @@ Contribuições são o que tornam a comunidade de código aberto um lugar incrí
 5.  **Abra um Pull Request**.
 
 ---
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
