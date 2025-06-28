@@ -1,4 +1,4 @@
-// src/app/ranking/page.tsx
+
 'use client'
 import { VotesContext } from "@/contexts/RankingContext";
 import { useEffect, useState, useMemo } from "react";
@@ -6,6 +6,7 @@ import RankingArticle from "./components/RankingArticle";
 import Heading from "./components/Heading";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import GeneralRanking from "./components/GeneralRanking";
 
 // Definindo um tipo para os nossos Pokémon vindos da API
 interface RankedPokemon {
@@ -80,12 +81,12 @@ export default function Ranking() {
           {isLoading ? (
             <p className="text-white text-2xl">Carregando rankings...</p>
           ) : (
-            <>
-              <RankingArticle title="Ranking Geral" pokemonsList={generalPokemons} color="bg-gray-700" />
+            <div className="flex flex-wrap gap-10 items-center justify-center">
+              <GeneralRanking pokemonsList={generalPokemons} />
               <RankingArticle title="Fire Pokemons" pokemonsList={firePokemons} color="bg-red-800" />
               <RankingArticle title="Water Pokemons" pokemonsList={waterPokemons} color="bg-blue-700" />
               <RankingArticle title="Flying Pokemons" pokemonsList={flyingPokemons} color="bg-sky-500" />
-            </>
+            </div>
           )}
         </section>
         <Link

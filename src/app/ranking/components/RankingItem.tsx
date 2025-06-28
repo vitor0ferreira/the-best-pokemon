@@ -8,13 +8,14 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 
-interface RankingItemProps {
+interface PokemonProps {
   pokemon: string,
   id: number,
   rank: number,
+  votes: number
 }
 
-function RankingItem({pokemon, rank, id}: RankingItemProps) {
+function RankingItem({pokemon, rank, id, votes}: PokemonProps) {
 
   const [imageUrl, setImageUrl] = useState<string>(`https://img.pokemondb.net/artwork/large/${pokemon}.jpg`)
   const [showModal, setShowModal] = useState<Boolean>(false)
@@ -76,16 +77,20 @@ function RankingItem({pokemon, rank, id}: RankingItemProps) {
 
   return (
     <>
-      <div id={id.toString()} className="w-full min-h-12 h-16 border-black border-2 cursor-pointer hover:opacity-80 flex" onClick={(e)=> handleClick(e)}>
-        <div className="h-full w-20 bg-black text-white flex items-center justify-center text-4xl font-bold">
+      <div id={id.toString()} className="w-full min-h-[3rem] h-16 border-black border-2 cursor-pointer hover:opacity-80 flex" onClick={(e)=> handleClick(e)}>
+        <div className="w-16 bg-black text-white flex items-center justify-center text-4xl font-bold">
           {rank}
         </div>
-        <div className={`flex-1 flex items-center justify-start pl-3 font-bold whitespace-nowrap text-white text-[2.5rem] bg-gradient-to-b h-full overflow-hidden`}>
-          <abbr title={pokemon.toLocaleUpperCase()} className="no-underline">
+        <div className="flex-1 flex items-center justify-between px-3 font-bold whitespace-nowrap text-white text-[1.5rem] bg-gradient-to-b h-full overflow-hidden" >
+          <span className="no-underline">
             {pokemon[0].toLocaleUpperCase()+pokemon.slice(1)}
-          </abbr>
+          </span>
+          <span className="text-[0.5rem] h-min w-8 bg-black px-1 flex flex-col items-center justify-around">
+            <span className="text-[1.2rem]">{votes}</span>
+            <span className="-translate-y-1">votes</span>
+          </span>
         </div>
-        <div className="relative h-full w-20 p-1 flex items-center justify-center overflow-hidden">
+        <div className="relative w-20 p-1 flex items-center justify-center overflow-hidden">
           <Image 
             src={imageUrl}
             fill

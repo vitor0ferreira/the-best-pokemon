@@ -1,4 +1,4 @@
-// src/app/api/ranking/general/route.ts
+
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
@@ -7,7 +7,10 @@ const prisma = new PrismaClient();
 export async function GET() {
   try {
     const pokemons = await prisma.pokemon.findMany({
-      orderBy: { votes: 'desc' },
+      orderBy: [
+        { votes: 'desc' },
+        { id: 'asc' }
+      ],
       take: 20,
     });
     return NextResponse.json(pokemons);
