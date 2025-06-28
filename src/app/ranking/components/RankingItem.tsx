@@ -1,9 +1,12 @@
 import Image from "next/image";
-import { useState, useEffect, useContext } from "react"
+import React, { useState, useContext } from "react"
 
 import PokemonModal from "@/components/modals/PokemonModal";
 import VoteCompletedModal from "@/components/modals/VoteCompletedModal";
 import { VotesContext } from "@/contexts/RankingContext";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 
 interface RankingItemProps {
   pokemon: string,
@@ -11,13 +14,17 @@ interface RankingItemProps {
   rank: number,
 }
 
-export default function RankingItem({pokemon, rank, id}: RankingItemProps) {
+function RankingItem({pokemon, rank, id}: RankingItemProps) {
 
   const [imageUrl, setImageUrl] = useState<string>(`https://img.pokemondb.net/artwork/large/${pokemon}.jpg`)
   const [showModal, setShowModal] = useState<Boolean>(false)
   const [showVotedModal, setShowVotedModal] = useState<Boolean>(false)
+  const router = useRouter()
   
-  const {remainingVotes, setRemainingVotes} = useContext(VotesContext)
+  const { data: session } = useSession();
+  const { setRemainingVotes } = useContext(VotesContext)
+
+  console.log(`Renderizado ${pokemon}`)
 
   const handleClick = (e:any) => {
     setShowModal(!showModal)
@@ -28,13 +35,39 @@ export default function RankingItem({pokemon, rank, id}: RankingItemProps) {
     }
   }
 
-  const handleVote = () => {
-    if(showModal){
-      setShowModal(false)
+  const handleVote = async () => {
+    if (!session) {
+      alert('Você precisa estar logado para votar!');
+      // Idealmente, redirecionar para a página de login
+      router.push('/login');
+      return;
     }
-    setShowVotedModal(!showVotedModal)
-    setRemainingVotes(remainingVotes - 1)
-  }
+
+    try {
+      const response = await fetch('/api/vote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ pokemonId: id }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        if (showModal) setShowModal(false);
+        setShowVotedModal(true);
+        setRemainingVotes(data.remainingVotes); // Atualiza o contexto com os votos restantes
+      } else {
+        // Se a API retornar um erro (ex: limite de votos), exibe a mensagem
+        alert(data.message);
+        if (showModal) setShowModal(false);
+      }
+    } catch (error) {
+      console.error('Erro ao votar:', error);
+      alert('Ocorreu um erro ao tentar votar.');
+    }
+  };
 
   const handleImageLoadError = () => {
     setImageUrl(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`)
@@ -64,10 +97,12 @@ export default function RankingItem({pokemon, rank, id}: RankingItemProps) {
         </div>
       </div>
       
-      {showModal && <PokemonModal pokemonData={pokemon} onclick={handleClick} 
-        onyesclick={handleVote}
-      />}
-      {showVotedModal && <VoteCompletedModal pokemonData={pokemon} onclick={handleVote}/>}
+      { showModal && <PokemonModal pokemonData={pokemon} onclick={handleClick} onyesclick={handleVote} />}
+
+      { showVotedModal && <VoteCompletedModal pokemonData={pokemon} onclick={handleVote} />}
+      
     </>
   );
 }
+
+export default React.memo(RankingItem)
