@@ -27,7 +27,7 @@
     "tailwindcss": "3.3.2"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "overrides": {
     "@types/react": "19.1.6",
