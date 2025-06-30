@@ -49,6 +49,7 @@ export default async function RootLayout({
 
         </footer>
         </SessionProvider>
+        <div id='modal-root'></div>
       </body>
     </html>
   )
