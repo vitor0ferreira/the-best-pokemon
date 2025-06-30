@@ -4,9 +4,8 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// 2. Ajuste a assinatura da função GET
-export async function GET(request: NextRequest, { params }: { params: { type: string } }) {
-  const { type } = params;
+export async function GET(request: NextRequest, { params }: { params: Promise<{ type: string }> }) {
+  const { type } = await params;
 
   try {
     const pokemons = await prisma.pokemon.findMany({

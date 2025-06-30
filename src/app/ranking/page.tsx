@@ -61,7 +61,7 @@ export default function Ranking() {
     // Buscar os votos restantes do usuário se ele estiver logado
     const fetchUserStatus = async () => {
       if (status === 'authenticated') {
-        const res = await fetch('/api/user/status'); // Você precisará criar esta API
+        const res = await fetch('/api/user/status');
         if (res.ok) {
           const data = await res.json();
           setRemainingVotes(data.remainingVotes);
