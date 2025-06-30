@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
       })
     ]);
 
-    // Revalida a página de ranking para que os outros usuários vejam a atualização
+    // Revalida a página de ranking
     revalidatePath('/ranking');
 
     const remainingVotes = VOTES_LIMIT - updatedUser.votesToday;
