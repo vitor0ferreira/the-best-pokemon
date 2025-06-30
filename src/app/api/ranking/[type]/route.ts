@@ -4,9 +4,9 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(request: NextRequest, context: { params: { type: string } }) {
-  const { params } = context;
-  const { type } = params;
+export async function GET(request: NextRequest, context: { params: Record<string, string> }) {
+
+  const { type } = context.params;
 
   try {
     const pokemons = await prisma.pokemon.findMany({
