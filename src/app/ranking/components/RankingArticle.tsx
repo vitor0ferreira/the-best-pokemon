@@ -1,5 +1,5 @@
 
-import RankingItem from "@/app/ranking/components/RankingItem";
+import RankingItem from "@/src/app/ranking/components/RankingItem";
 
 
 export default function RankingArticle({ title, pokemonsList, color }: { title: string, pokemonsList: any[], color: string }) {

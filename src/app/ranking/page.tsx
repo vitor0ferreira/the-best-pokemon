@@ -1,6 +1,6 @@
 
 'use client'
-import { VotesContext } from "@/contexts/RankingContext";
+import { VotesContext } from "@/src/contexts/RankingContext";
 import { useEffect, useState, useMemo } from "react";
 import RankingArticle from "./components/RankingArticle";
 import Heading from "./components/Heading";

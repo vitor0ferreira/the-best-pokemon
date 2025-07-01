@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { RiAccountBoxFill } from "react-icons/ri";
 import { TbLogout2, TbLogin2 } from "react-icons/tb";
-import { signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
 interface User {

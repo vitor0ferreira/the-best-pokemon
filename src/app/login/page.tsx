@@ -1,7 +1,8 @@
 'use client'
 import { MdCatchingPokemon } from "react-icons/md";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

@@ -1,21 +1,20 @@
-// src/app/api/user/status/route.ts
-import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+import { NextResponse } from 'next/server';
+import { prisma } from '@/src/lib/prisma';
+import { auth } from "@/auth"
+
 const VOTES_LIMIT = 10;
 
 export async function GET() {
-  const session = await getServerSession();
+  const session = await auth();
 
-  if (!session?.user?.email) {
+  if (!session?.user) {
     return NextResponse.json({ loggedIn: false, remainingVotes: 0 });
   }
 
   try {
     const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
+      where: { email: session.user.email as NonNullable<string> },
     });
 
     if (!user) {

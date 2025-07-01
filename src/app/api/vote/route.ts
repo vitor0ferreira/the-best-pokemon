@@ -1,16 +1,15 @@
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { PrismaClient } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
+import { prisma } from '@/src/lib/prisma';
+import { auth } from '@/auth';
 
-const prisma = new PrismaClient();
 const VOTES_LIMIT = 10; // Limite de votos diário
 
 export async function POST(request: NextRequest) {
-  const session = await getServerSession();
+  const session = await auth();
 
-  if (!session?.user?.email) {
+  if (!session?.user) {
     return NextResponse.json({ message: 'Não autorizado. Faça login para votar.' }, { status: 401 });
   }
 

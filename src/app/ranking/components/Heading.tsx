@@ -1,4 +1,4 @@
-import { VotesContext } from "@/contexts/RankingContext"
+import { VotesContext } from "@/src/contexts/RankingContext"
 import { useContext } from "react"
 
 

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React, { useState, useContext } from "react"
 
-import PokemonModal from "@/components/modals/PokemonModal";
-import VoteCompletedModal from "@/components/modals/VoteCompletedModal";
-import { VotesContext } from "@/contexts/RankingContext";
+import PokemonModal from "@/src/components/modals/PokemonModal";
+import VoteCompletedModal from "@/src/components/modals/VoteCompletedModal";
+import { VotesContext } from "@/src/contexts/RankingContext";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -34,6 +34,10 @@ function RankingItem({pokemon, rank, id, votes}: PokemonProps) {
     } else {
       console.log(e.target.parentElement.parentElement.id)
     }
+  }
+
+  const handleCloseVotedModal = () => {
+    setShowVotedModal(false);
   }
 
   const handleVote = async () => {
@@ -104,7 +108,7 @@ function RankingItem({pokemon, rank, id, votes}: PokemonProps) {
       
       { showModal && <PokemonModal pokemonData={pokemon} onclick={handleClick} onyesclick={handleVote} />}
 
-      { showVotedModal && <VoteCompletedModal pokemonData={pokemon} onclick={handleVote} />}
+      { showVotedModal && <VoteCompletedModal pokemonData={pokemon} onclick={handleCloseVotedModal} />}
       
     </>
   );
