@@ -1,7 +1,6 @@
-// prisma/schema.prisma
 
 datasource db {
-  provider = "postgresql" // Ou "mysql", "sqlite", etc.
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -60,7 +59,7 @@ model VerificationToken {
 model Pokemon {
   id    Int      @id
   name  String   @unique
-  types String[] // Armazena uma lista de tipos
+  types String[] // Armazena uma lista de tipos porque existem pokemons com mais de 1 tipo.
   votes Int      @default(0)
   Vote  Vote[]
 }

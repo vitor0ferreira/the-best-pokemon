@@ -1,7 +1,7 @@
 
 'use client'
 import { VotesContext } from "@/src/contexts/RankingContext";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import RankingArticle from "./components/RankingArticle";
 import Heading from "./components/Heading";
 import Link from "next/link";
@@ -17,7 +17,7 @@ interface RankedPokemon {
 }
 
 export default function Ranking() {
-  const [remainingVotes, setRemainingVotes] = useState(10);
+  const [remainingVotes, setRemainingVotes] = useState<number | null>(null);
   const { data: session, status } = useSession();
 
   // Estados para cada lista de ranking
@@ -33,32 +33,40 @@ export default function Ranking() {
     setRemainingVotes
   }), [remainingVotes]);
 
-  useEffect(() => {
-    // Função para buscar os dados de um endpoint específico
-    const fetchRanking = async (endpoint: string, setter: React.Dispatch<React.SetStateAction<RankedPokemon[]>>) => {
+  const fetchAllRankings = useCallback(async () => {
+    // Não precisamos do setIsLoading(true) aqui para evitar um "flash" de loading
+    // durante a re-busca, a atualização será quase instantânea.
+    const fetchRanking = async (endpoint: string) => {
       try {
         const response = await fetch(`/api/ranking/${endpoint}`);
-        const data = await response.json();
-        setter(data);
+        return await response.json();
       } catch (error) {
         console.error(`Erro ao buscar ranking para ${endpoint}:`, error);
+        return []; // Retorna array vazio em caso de erro
       }
     };
 
-    const fetchAllRankings = async () => {
+    const [general, fire, water, flying] = await Promise.all([
+      fetchRanking('general'),
+      fetchRanking('fire'),
+      fetchRanking('water'),
+      fetchRanking('flying'),
+    ]);
+    
+    setGeneralPokemons(general);
+    setFirePokemons(fire);
+    setWaterPokemons(water);
+    setFlyingPokemons(flying);
+  }, []); // useCallback com array de dependências vazio
+
+  useEffect(() => {
+    const initialLoad = async () => {
       setIsLoading(true);
-      await Promise.all([
-        fetchRanking('general', setGeneralPokemons),
-        fetchRanking('fire', setFirePokemons),
-        fetchRanking('water', setWaterPokemons),
-        fetchRanking('flying', setFlyingPokemons),
-      ]);
+      await fetchAllRankings();
       setIsLoading(false);
-    };
+    }
+    initialLoad();
 
-    fetchAllRankings();
-
-    // Buscar os votos restantes do usuário se ele estiver logado
     const fetchUserStatus = async () => {
       if (status === 'authenticated') {
         const res = await fetch('/api/user/status');
@@ -69,12 +77,11 @@ export default function Ranking() {
       }
     }
     fetchUserStatus();
-
-  }, [status]);
+  }, [status, fetchAllRankings]); // Adicione fetchAllRankings à dependência
 
   return(
     <main className="bg-gradient-to-b from-red-500 to-red-800 flex flex-col items-center
-    justify-around min-h-screen h-max min-w-full gap-5 py-10">
+    justify-start min-h-screen h-max min-w-full gap-5 py-10">
       <VotesContext.Provider value={contextValue}>
         <Heading/>
         <section id="rankings" className="flex w-full gap-8 justify-center flex-wrap">
@@ -83,9 +90,9 @@ export default function Ranking() {
           ) : (
             <div className="flex flex-wrap gap-10 items-center justify-center">
               <GeneralRanking pokemonsList={generalPokemons} />
-              <RankingArticle title="Fire Pokemons" pokemonsList={firePokemons} color="bg-red-800" />
-              <RankingArticle title="Water Pokemons" pokemonsList={waterPokemons} color="bg-blue-700" />
-              <RankingArticle title="Flying Pokemons" pokemonsList={flyingPokemons} color="bg-sky-500" />
+              <RankingArticle title="Fire Pokemons" pokemonsList={firePokemons} color="bg-red-800" onVoteSuccess={fetchAllRankings}/>
+              <RankingArticle title="Water Pokemons" pokemonsList={waterPokemons} color="bg-blue-700" onVoteSuccess={fetchAllRankings}/>
+              <RankingArticle title="Flying Pokemons" pokemonsList={flyingPokemons} color="bg-sky-500" onVoteSuccess={fetchAllRankings}/>
             </div>
           )}
         </section>

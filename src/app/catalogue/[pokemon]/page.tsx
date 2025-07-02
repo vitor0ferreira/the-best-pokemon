@@ -2,15 +2,16 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { PokemonData } from "@/types/pokemonTypes";
+import { PokemonData } from "@/src/types/pokemonTypes";
+import { useVoting } from "@/src/hooks/useVoting";
 
 
 export default function PokemonDetailsPage (){
 
     const { pokemon: pokemon } = useParams()
-    const [pokemonData, setPokemonData] = useState<PokemonData>()
+    const [pokemonData, setPokemonData] = useState<PokemonData>();
 
-    
+    const { VotingModals, initiateVote } = useVoting({})
 
     useEffect(()=>{
 
@@ -36,9 +37,16 @@ export default function PokemonDetailsPage (){
 
     return (
         <main className="w-full min-h-screen h-max text-sm flex items-center justify-center">
+            <VotingModals />
             {pokemonData && 
                 <div className="min-w-[400px] w-max min-h-[700px] h-max bg-slate-100 drop-shadow-md grid grid-cols-1 gap-2 py-8 px-2">
-                    <div className="relative border-2 border-white flex items-center flex-col gap-4">
+                    <button 
+                        className="py-2 px-3 mx-auto rounded-md font-semibold text-2xl bg-green-700 hover:bg-red-500 text-white"
+                        onClick={() => initiateVote({ id: pokemonData.id, name: pokemonData.name })}
+                    >
+                        Vote on {pokemonData.name[0].toLocaleUpperCase()+pokemonData.name.slice(1)}
+                    </button>
+                    <div className="relative flex items-center flex-col gap-4">
                         <Image 
                             src={`https://img.pokemondb.net/artwork/large/${pokemon}.jpg`} 
                             alt="pokemon image"

@@ -1,8 +1,15 @@
 
 import RankingItem from "@/src/app/ranking/components/RankingItem";
 
+interface ArticleProps {
+  title: string,
+  pokemonsList: any[],
+  color: string,
+  onVoteSuccess: () => void,
+}
 
-export default function RankingArticle({ title, pokemonsList, color }: { title: string, pokemonsList: any[], color: string }) {
+export default function RankingArticle({ title, pokemonsList, color, onVoteSuccess }: ArticleProps) {
+
   let rank = 0;
 
   return (
@@ -20,6 +27,7 @@ export default function RankingArticle({ title, pokemonsList, color }: { title: 
           
           return (
             <RankingItem
+              onVoteSuccess={onVoteSuccess}
               rank={rank}
               pokemon={pokemon.name}
               key={pokemon.id}
