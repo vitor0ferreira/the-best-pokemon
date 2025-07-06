@@ -21,7 +21,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${fontsClassnames} flex flex-col min-h-screen bg-main-gradient`}>
+      <body className={`${fontsClassnames} flex flex-col min-h-screen bg-red-600 bg-pokeball-gradient`}>
 
         <SessionProvider>
           <Header />

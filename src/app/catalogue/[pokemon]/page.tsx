@@ -78,7 +78,7 @@ export default function PokemonDetailsPage() {
   }
 
   return (
-    <main className="w-full h-full flex flex-grow items-center justify-center bg-slate-50 p-4">
+    <main className="w-full h-full flex flex-grow items-center justify-center p-4">
       <VotingModals />
       <div className="w-full max-w-4xl bg-slate-100 drop-shadow-lg rounded-lg grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 p-4 md:p-8">
         <div className="flex flex-col items-center gap-4">
@@ -102,7 +102,7 @@ export default function PokemonDetailsPage() {
               {pokemonData.height / 10} m
             </span>
             <button
-              className="w-full max-w-xs mt-4 py-3 px-4 rounded-lg font-semibold text-xl text-white bg-green-600 hover:bg-green-700 transition-colors shadow-lg"
+              className="w-full max-w-xs mt-4 py-3 px-4 rounded-lg font-semibold text-xl text-white bg-green-700 hover:bg-green-800 transition-colors shadow-lg"
               onClick={() =>
                 initiateVote({ id: pokemonData.id, name: pokemonData.name })
               }
