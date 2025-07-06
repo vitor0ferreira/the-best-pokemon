@@ -18,7 +18,11 @@ export default function Login () {
   }, [session, status, router]);
 
   const GithubSignIn = () => {
-    signIn('github', { callbackUrl: '/' });
+    signIn('github', { redirectTo: '/' });
+  }
+
+  const GoogleSignIn = () => {
+    signIn('google', { redirectTo: '/' })
   }
 
   if (status === 'loading') {
@@ -104,7 +108,10 @@ export default function Login () {
             <FaGithub color="white"/>
           </button>
 
-          <button className="flex-1 p-2 flex justify-center rounded-md h-8 bg-emerald-500 hover:bg-emerald-600">
+          <button 
+            className="flex-1 p-2 flex justify-center rounded-md h-8 bg-emerald-500 hover:bg-emerald-600"
+            onClick={GoogleSignIn}
+            >
             <FaGoogle color="white"/>
           </button>
         </div>
