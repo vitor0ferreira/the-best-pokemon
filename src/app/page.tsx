@@ -37,12 +37,12 @@ export default function Home() {
       }
 
       {/* Presentation Section */}
-      <section className='w-[80%] h-96 bg-white flex items-center justify-center'>
+      <section className='w-full max-w-5xl min-h-96 bg-white flex items-center justify-center rounded-lg shadow-md my-8 p-4'>
         Presentation
       </section>
 
       {/* Highlights Section */}
-      <section className='w-[80%] flex flex-col items-center justify-center text-center'>
+      <section className='w-full max-w-5xl flex flex-col items-center justify-center text-center px-4'>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque atque nemo distinctio ipsa expedita veritatis nisi cum eligendi vel, nihil et eius aspernatur voluptas iste omnis? Quis dolore nulla illum!
       </section>
 

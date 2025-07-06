@@ -21,7 +21,7 @@ export default function RankingArticle({ title, pokemonsList, color, onVoteSucce
       >
         {title}
       </span>
-      <article className="bg-white flex flex-col justify-start items-center h-min max-h-[66vh] w-[24rem] rounded-2xl overflow-x-hidden overflow-y-scroll border-[4px] border-black">
+      <article className="bg-white flex flex-col justify-start items-center h-min max-h-[66vh] w-full max-w-sm rounded-2xl overflow-x-hidden border-[4px] border-black">
         {pokemonsList.map((pokemon: any) => {
           rank++;
           

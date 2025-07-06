@@ -15,8 +15,8 @@ export default function PokemonModal({pokemonName, isVoting, onConfirmVote, onDe
       <div className="bg-black/50 fixed inset-0 z-50" onClick={isVoting ? undefined : onDeclineVote}></div>
       {
         !isVoting ? 
-        (<div className="fixed inset-0 z-50 m-auto h-max w-max rounded-xl bg-white p-6 flex justify-start items-center gap-4">
-          <span className="text-4xl font-bold">
+        (<div className="fixed inset-0 z-50 m-auto h-max w-11/12 max-w-lg rounded-xl bg-white p-4 sm:p-6 flex flex-col sm:flex-row justify-center items-center gap-4 text-center">
+          <span className="text-2xl sm:text-3xl font-bold">
             Confirm vote to: {pokemonName.toUpperCase()}
           </span>
           <button className="font-bold text-3xl text-white bg-green-700 p-2 rounded-md hover:scale-105" onClick={onConfirmVote}>YES</button>

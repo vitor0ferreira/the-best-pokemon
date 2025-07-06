@@ -1,4 +1,4 @@
-// src/components/DropdownMenu.tsx
+
 'use client'
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -19,20 +19,17 @@ export default function DropdownMenu () {
 
   // Função para fazer o logout
   const handleSignOut = async (e: React.MouseEvent) => {
-    // 1. Previne que o clique se propague e feche o menu prematuramente
-    console.log("signOut");
     e.stopPropagation(); 
     await signOut({ callbackUrl: '/' });
   };
   
   // Função para abrir/fechar o dropdown
   const toggleDropdown = (e: React.MouseEvent) => {
-    // 2. Também é uma boa prática parar a propagação aqui
     e.stopPropagation();
     setIsOpen(prev => !prev);
   };
   
-  // Efeito para fechar o menu quando clicar fora
+  // Efeito para fechar o menu quando clicar fora 
   useEffect(() => {
     const closeDropdown = () => setIsOpen(false);
     
