@@ -7,6 +7,7 @@ import Heading from "./components/Heading";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import GeneralRanking from "./components/GeneralRanking";
+import { IoHome } from "react-icons/io5";
 
 // Definindo um tipo para os nossos Pokémon vindos da API
 interface RankedPokemon {
@@ -22,9 +23,11 @@ export default function Ranking() {
 
   // Estados para cada lista de ranking
   const [generalPokemons, setGeneralPokemons] = useState<RankedPokemon[]>([])
-  const [firePokemons, setFirePokemons] = useState<RankedPokemon[]>([]);
-  const [waterPokemons, setWaterPokemons] = useState<RankedPokemon[]>([]);
-  const [flyingPokemons, setFlyingPokemons] = useState<RankedPokemon[]>([]);
+  const [firePokemons, setFirePokemons] = useState<RankedPokemon[]>([])
+  const [grassPokemons, setGrassPokemons] = useState<RankedPokemon[]>([])
+  const [waterPokemons, setWaterPokemons] = useState<RankedPokemon[]>([])
+  const [fairyPokemons, setFairyPokemons] = useState<RankedPokemon[]>([])
+  const [flyingPokemons, setFlyingPokemons] = useState<RankedPokemon[]>([])
   
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -46,18 +49,22 @@ export default function Ranking() {
       }
     };
 
-    const [general, fire, water, flying] = await Promise.all([
+    const [general, fire, grass, water, fairy, flying] = await Promise.all([
       fetchRanking('general'),
       fetchRanking('fire'),
+      fetchRanking('grass'),
       fetchRanking('water'),
+      fetchRanking('fairy'),
       fetchRanking('flying'),
     ]);
     
     setGeneralPokemons(general);
     setFirePokemons(fire);
+    setGrassPokemons(grass);
     setWaterPokemons(water);
+    setFairyPokemons(fairy);
     setFlyingPokemons(flying);
-  }, []); // useCallback com array de dependências vazio
+  }, []);
 
   useEffect(() => {
     const initialLoad = async () => {
@@ -80,8 +87,8 @@ export default function Ranking() {
   }, [status, fetchAllRankings]); // Adicione fetchAllRankings à dependência
 
   return(
-    <main className="bg-gradient-to-b from-red-500 to-red-800 flex flex-col items-center
-    justify-start min-h-screen h-max min-w-full gap-5 py-10">
+    <main className="flex flex-grow flex-col items-center
+    justify-start h-max min-w-full gap-5 py-10 px-4">
       <VotesContext.Provider value={contextValue}>
         <Heading/>
         <section id="rankings" className="flex w-full gap-8 justify-center flex-wrap">
@@ -91,17 +98,20 @@ export default function Ranking() {
             <div className="flex flex-wrap gap-10 items-center justify-center">
               <GeneralRanking pokemonsList={generalPokemons} />
               <RankingArticle title="Fire Pokemons" pokemonsList={firePokemons} color="bg-red-800" onVoteSuccess={fetchAllRankings}/>
+              <RankingArticle title="Grass Pokemons" pokemonsList={grassPokemons} color="bg-green-700" onVoteSuccess={fetchAllRankings}/>
               <RankingArticle title="Water Pokemons" pokemonsList={waterPokemons} color="bg-blue-700" onVoteSuccess={fetchAllRankings}/>
-              <RankingArticle title="Flying Pokemons" pokemonsList={flyingPokemons} color="bg-sky-500" onVoteSuccess={fetchAllRankings}/>
+              <RankingArticle title="Fairy Pokemons" pokemonsList={fairyPokemons} color="bg-pink-500" onVoteSuccess={fetchAllRankings}/>
+              <RankingArticle title="Flying Pokemons" pokemonsList={flyingPokemons} color="bg-sky-600" onVoteSuccess={fetchAllRankings}/>
             </div>
           )}
         </section>
         <Link
           href='/'
-          className='h-14 w-max p-4 my-10 cursor-pointer flex items-center text-3xl font-bold rounded-md bg-white hover:scale-105 shadow-md'
+          className='h-max w-max px-3 sm:px-5 py-1 sm:py-3 my-10 cursor-pointer flex items-center gap-2 text-xl sm:text-2xl font-bold rounded-md bg-white hover:scale-105 hover:bg-slate-100 shadow-md'
           target='_self'
         >
-          Back {'<-'}
+          <IoHome />
+          Homepage
         </Link>
       </VotesContext.Provider>
     </main>
