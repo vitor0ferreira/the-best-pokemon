@@ -11,7 +11,7 @@
     "populate:json": "tsx scripts/populate-pokemon-json.ts"
   },
   "dependencies": {
-    "@next-auth/prisma-adapter": "^1.0.7",
+    "@auth/prisma-adapter": "^2.10.0",
     "@prisma/client": "^6.10.1",
     "@types/node": "20.2.3",
     "@types/react": "19.1.6",
@@ -21,7 +21,7 @@
     "eslint": "^9.30.0",
     "eslint-config-next": "15.3.2",
     "next": "15.3.2",
-    "next-auth": "^4.24.11",
+    "next-auth": "^5.0.0-beta.29",
     "postcss": "8.4.23",
     "react": "19.1.0",
     "react-dom": "19.1.0",

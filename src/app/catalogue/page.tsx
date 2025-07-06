@@ -1,6 +1,6 @@
 'use client'
 
-import { ALL_POKEMON_LIST } from "@/constants/allPokemonList";
+import { ALL_POKEMON_LIST } from "@/src/constants/allPokemonList";
 import { useState, useEffect, useRef } from "react";
 import PokemonCard from "./components/PokemonCard";
 

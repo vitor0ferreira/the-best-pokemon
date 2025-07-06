@@ -1,11 +1,11 @@
 import { createContext } from "react";
 
 interface RankingContextProps {
-  remainingVotes: number;
-  setRemainingVotes: React.Dispatch<React.SetStateAction<number>>;
+  remainingVotes: number | null;
+  setRemainingVotes: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 export const VotesContext = createContext<RankingContextProps>({
-  remainingVotes: 10,
+  remainingVotes: null,
   setRemainingVotes: ()=>{},
 })

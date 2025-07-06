@@ -1,27 +1,3 @@
-import { PrismaClient } from "@prisma/client";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import NextAuth from "next-auth/next";
-import { AuthOptions } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
 
-const prisma = new PrismaClient();
-
-const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prisma),
-
-  providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_ID ?? "",
-      clientSecret: process.env.GITHUB_SECRET ?? ""
-    }),
-  ],
-
-  session: {
-    strategy: "database",
-  },
-  
-};
-
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST}
+import { handlers } from "@/auth" // O Next.js resolverá o caminho para o arquivo auth.ts na raiz
+export const { GET, POST } = handlers

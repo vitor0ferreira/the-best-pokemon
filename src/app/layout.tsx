@@ -1,8 +1,7 @@
 import './globals.css'
 import { Inter, Roboto } from 'next/font/google'
-import { getServerSession } from 'next-auth'
-import SessionProvider from '@/contexts/ServerProvider'
-import DropdownMenu from '@/components/DropdownMenu';
+import SessionProvider from '../contexts/ServerProvider'
+import DropdownMenu from '../components/DropdownMenu';
 import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -15,18 +14,18 @@ export const metadata = {
   description: 'A ranking project to determinate (democratically) the best pokemon of all times.'
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
 
-  const session = await getServerSession();
+
 
   return (
     <html lang="en">
       <body className={fontsClassnames}>
-        <SessionProvider session={session}>
+        <SessionProvider>
         {/* Header */}
         <header className="h-max w-full bg-white items-center justify-center flex-col gap-1 px-2 py-2 hidden sm:flex sm:flex-row sm:gap-4 md:justify-evenly xl:justify-between xl:px-10">
           <span className='italic font-extrabold text-red-600 mt-2 text-2xl whitespace-nowrap sm:text-3xl sm:mt-0 md:text-4xl'>
