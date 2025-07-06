@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'pokeball-gradient': 'radial-gradient(circle at 50% -20%, white, rgba(239, 68, 68, 0.5) 35%, transparent 60%)',
+      },
       boxShadow: {
         '3xl': '0 0 2rem -.4rem rgba(0, 0, 0, 0.5)',
       },

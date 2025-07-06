@@ -59,7 +59,7 @@ export default function Catalogue () {
   }, [isLoading, offset, filteredPokemonsList.length]);
 
   return (
-    <main className="bg-red-600 min-h-screen flex flex-col items-center justify-start p-4 gap-10">
+    <main className="min-h-screen flex flex-col items-center justify-start p-4 gap-10">
       <input
         type="text"
         placeholder="Type a pokemon name..."

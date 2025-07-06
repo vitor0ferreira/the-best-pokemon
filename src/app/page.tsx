@@ -10,9 +10,9 @@ export default function Home() {
   const { data: session} = useSession()
 
   return (
-    <main className='bg-gradient-to-b from-red-500 to-red-800 flex flex-col items-center gap-4 min-h-screen h-max min-w-full'>
+    <main className='px-2 flex flex-col items-center gap-4 min-h-screen h-max min-w-full'>
       
-      <span className='font-bold text-white italic drop-shadow-sm text-4xl md:text-6xl lg:text-8xl mb-2 mt-8'>
+      <span className='font-bold text-white text-center italic drop-shadow-sm text-4xl md:text-6xl lg:text-8xl mb-2 mt-8'>
         The Best Pokemon
       </span>
       
@@ -37,12 +37,12 @@ export default function Home() {
       }
 
       {/* Presentation Section */}
-      <section className='w-[80%] h-96 bg-white flex items-center justify-center'>
+      <section className='w-full max-w-5xl min-h-96 bg-white flex items-center justify-center rounded-lg shadow-md my-8 p-4'>
         Presentation
       </section>
 
       {/* Highlights Section */}
-      <section className='w-[80%] flex flex-col items-center justify-center text-center'>
+      <section className='w-full max-w-5xl flex flex-col items-center justify-center text-center px-4'>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque atque nemo distinctio ipsa expedita veritatis nisi cum eligendi vel, nihil et eius aspernatur voluptas iste omnis? Quis dolore nulla illum!
       </section>
 
