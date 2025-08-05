@@ -21,6 +21,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+
       <body className={`${fontsClassnames} flex flex-col min-h-screen bg-slate-700`}>
 
         <SessionProvider>
