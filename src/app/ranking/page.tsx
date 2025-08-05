@@ -37,8 +37,6 @@ export default function Ranking() {
   }), [remainingVotes]);
 
   const fetchAllRankings = useCallback(async () => {
-    // Não precisamos do setIsLoading(true) aqui para evitar um "flash" de loading
-    // durante a re-busca, a atualização será quase instantânea.
     const fetchRanking = async (endpoint: string) => {
       try {
         const response = await fetch(`/api/ranking/${endpoint}`);
@@ -97,7 +95,7 @@ export default function Ranking() {
           ) : (
             <div className="flex flex-wrap gap-10 items-center justify-center">
               <GeneralRanking pokemonsList={generalPokemons} />
-              <RankingArticle title="Fire Pokemons" pokemonsList={firePokemons} color="bg-red-800" onVoteSuccess={fetchAllRankings}/>
+              <RankingArticle title="Fire Pokemons" pokemonsList={firePokemons} color="bg-red-600" onVoteSuccess={fetchAllRankings}/>
               <RankingArticle title="Grass Pokemons" pokemonsList={grassPokemons} color="bg-green-700" onVoteSuccess={fetchAllRankings}/>
               <RankingArticle title="Water Pokemons" pokemonsList={waterPokemons} color="bg-blue-700" onVoteSuccess={fetchAllRankings}/>
               <RankingArticle title="Fairy Pokemons" pokemonsList={fairyPokemons} color="bg-pink-500" onVoteSuccess={fetchAllRankings}/>

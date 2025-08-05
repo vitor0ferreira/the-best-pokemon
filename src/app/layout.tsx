@@ -21,7 +21,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${fontsClassnames} flex flex-col min-h-screen bg-red-600 bg-pokeball-gradient`}>
+      <body className={`${fontsClassnames} flex flex-col min-h-screen bg-slate-700`}>
 
         <SessionProvider>
           <Header />
@@ -29,8 +29,9 @@ export default function RootLayout({
           {children}
 
           {/* Footer */}
-          <footer className='w-full h-max p-2 bg-slate-200 flex items-center justify-center'>
-            <span className=" font-bold text-center text-gray-900 text-base sm:text-lg md:text-xl">The Best Pokemon is developed with NextJS and deployed on Vercel.</span>
+          <footer className='w-full h-max p-2 bg-slate-200 flex flex-col gap-2 items-center justify-center'>
+            <span className=" font-bold text-center text-gray-900 text-base sm:text-lg md:text-xl pb-1 border-b-2 border-black/50">The Best Pokemon is developed with NextJS and deployed on Vercel.</span>
+            <span className=" font-bold text-center text-gray-900 text-base sm:text-lg md:text-xl">All content and images are reserved property from Pokemon and Game Freak.</span>
           </footer>
 
         </SessionProvider>
