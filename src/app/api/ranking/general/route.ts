@@ -10,7 +10,7 @@ export async function GET() {
         { votes: 'desc' },
         { id: 'asc' }
       ],
-      take: 20,
+      take: 12,
     });
     return NextResponse.json(pokemons);
   } catch (error) {

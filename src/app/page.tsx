@@ -2,7 +2,9 @@
 
 import { FaVoteYea } from "react-icons/fa";
 import { useSession } from 'next-auth/react'
+import Image from "next/image";
 import Link from "next/link";
+import ash_gif from "@/public/assets/gifs/ash-pikachu-gif.gif"
 
 
 export default function Home() {
@@ -37,13 +39,28 @@ export default function Home() {
       }
 
       {/* Presentation Section */}
-      <section className='w-full max-w-5xl min-h-96 bg-white flex items-center justify-center rounded-lg shadow-md my-8 p-4'>
-        Presentation
+      <section className='w-max sm:w-full relative max-w-5xl h-max gap-4 flex flex-col sm:flex-row items-center justify-center shadow-md my-8 p-1'>
+        <div className='relative flex-1 min-h-24 w-64 aspect-[4/3]'>
+          <Image
+            src={ash_gif}
+            fill
+            alt="gif ash and pikachu"
+            unoptimized
+          />
+        </div>
+        <div className='relative flex-1 min-h-24 w-64 aspect-[4/3]'>
+          <Image
+            src={"https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExejFmZjlhczg4ZWU1cG8zbHlqMXlpeWNseXY4N2NyOWpvNHRmYTFueSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wZHzd1ZL3oENO/giphy.gif"}
+            fill
+            alt="gif ash and pikachu"
+            unoptimized
+          />
+        </div>
       </section>
 
       {/* Highlights Section */}
-      <section className='w-full max-w-5xl flex flex-col items-center justify-center text-center px-4'>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque atque nemo distinctio ipsa expedita veritatis nisi cum eligendi vel, nihil et eius aspernatur voluptas iste omnis? Quis dolore nulla illum!
+      <section className='w-full max-w-5xl flex flex-col items-center justify-center text-center text-white font-semibold text-2xl px-4'>
+        There is a lot of features that will coming soon. For now, just vote and be happy.
       </section>
 
       {/* Button to go to the rankings page */}
