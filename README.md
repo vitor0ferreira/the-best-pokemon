@@ -19,7 +19,6 @@ Este projeto é uma aplicação web interativa construída com as mais recentes 
 * [✨ Funcionalidades](#-funcionalidades)
 * [🛠️ Tecnologias Utilizadas](#-tecnologias-utilizadas)
 * [🤝 Como Contribuir](#-como-contribuir)
-* [📄 Licença](#-licença)
 
 ---
 
