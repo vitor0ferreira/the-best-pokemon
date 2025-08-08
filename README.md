@@ -18,11 +18,6 @@ Este projeto é uma aplicação web interativa construída com as mais recentes 
 * [💡 Sobre o Projeto](#-sobre-o-projeto)
 * [✨ Funcionalidades](#-funcionalidades)
 * [🛠️ Tecnologias Utilizadas](#-tecnologias-utilizadas)
-* [🚀 Como Começar](#-como-começar)
-  * [Pré-requisitos](#pré-requisitos)
-  * [Instalação](#instalação)
-* [Usage](#-uso)
-* [📂 Estrutura das Pastas](#-estrutura-das-pastas)
 * [🤝 Como Contribuir](#-como-contribuir)
 * [📄 Licença](#-licença)
 
