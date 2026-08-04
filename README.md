@@ -18,13 +18,7 @@ Este projeto é uma aplicação web interativa construída com as mais recentes 
 * [💡 Sobre o Projeto](#-sobre-o-projeto)
 * [✨ Funcionalidades](#-funcionalidades)
 * [🛠️ Tecnologias Utilizadas](#-tecnologias-utilizadas)
-* [🚀 Como Começar](#-como-começar)
-  * [Pré-requisitos](#pré-requisitos)
-  * [Instalação](#instalação)
-* [Usage](#-uso)
-* [📂 Estrutura das Pastas](#-estrutura-das-pastas)
 * [🤝 Como Contribuir](#-como-contribuir)
-* [📄 Licença](#-licença)
 
 ---
 
@@ -64,78 +58,6 @@ Este projeto foi construído com as seguintes tecnologias e bibliotecas:
     * React Icons
     * React Context API
 * **Qualidade de Código:** ESLint
-
----
-
-## 🚀 Como Começar
-
-Para executar este projeto em sua máquina local, siga os passos abaixo.
-
-### Pré-requisitos
-
-Certifique-se de ter os seguintes softwares instalados:
-
-* [Node.js](https://nodejs.org/) (versão 18 ou superior recomendada)
-* [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
-
-### Instalação
-
-1.  **Clone o repositório:**
-    ```bash
-    git clone "https://github.com/vitor0ferreira/the-best-pokemon.git"
-    ```
-2.  **Navegue até o diretório do projeto:**
-    ```bash
-    cd the-best-pokemon
-    ```
-3.  **Instale as dependências:**
-    ```bash
-    npm install
-    ```
-4.  **Configure as Variáveis de Ambiente:**
-    Crie um arquivo chamado `.env.local` na raiz do projeto e adicione as seguintes variáveis.
-
-    ```bash
-    # Credenciais do Provedor OAuth do GitHub
-    # Você pode obter as suas em: 'https://github.com/settings/developers'
-    GITHUB_ID="SUA_ID_DO_GITHUB"
-    GITHUB_SECRET="SEU_SEGREDO_DO_GITHUB"
-
-    # URL da sua aplicação (para desenvolvimento, use a URL local)
-    NEXTAUTH_URL="http://localhost:3000"
-
-    # Chave secreta para assinar os tokens do NextAuth
-    # Você pode gerar uma chave segura com o comando: openssl rand -base64 32
-    NEXTAUTH_SECRET="SUA_CHAVE_SECRETA_AQUI"
-    ```
-
----
-
-## Utilização
-
-Após a instalação e configuração, você pode rodar a aplicação:
-
-* **Para iniciar o servidor de desenvolvimento com Turbopack:**
-    ```bash
-    npm run dev
-    ```
-    Abra [http://localhost:3000](http://localhost:3000) em seu navegador para ver o resultado.
-
-* **Para criar a build de produção:**
-    ```bash
-    npm run build
-    ```
-
-* **Para iniciar o servidor de produção:**
-    ```bash
-    npm run start
-    ```
-
----
-
-## 📂 Estrutura das Pastas
-
-A estrutura de arquivos do projeto segue o padrão do App Router do Next.js:
 
 ---
 
