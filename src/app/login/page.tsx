@@ -1,14 +1,14 @@
-'use client'
-import { MdCatchingPokemon } from "react-icons/md";
-import { FaGithub, FaGoogle } from "react-icons/fa";
-import { useSession } from "next-auth/react";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+'use client';
 
-export default function Login () {
+import { useSession, signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { Trophy, ArrowLeft, ShieldCheck, Sparkles } from 'lucide-react';
+import Link from 'next/link';
 
-  const { data: session, status } = useSession(); 
+export default function Login() {
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
@@ -17,107 +17,88 @@ export default function Login () {
     }
   }, [session, status, router]);
 
-  const GithubSignIn = () => {
+  const handleGithubSignIn = () => {
     signIn('github', { redirectTo: '/' });
-  }
+  };
 
-  const GoogleSignIn = () => {
-    signIn('google', { redirectTo: '/' })
-  }
+  const handleGoogleSignIn = () => {
+    signIn('google', { redirectTo: '/' });
+  };
 
   if (status === 'loading') {
-    return <p>Loading...</p>;
+    return (
+      <main className="flex-grow w-full min-h-screen flex items-center justify-center bg-obsidian">
+        <div className="w-12 h-12 border-4 border-poke-red/30 border-t-poke-red rounded-full animate-spin" />
+      </main>
+    );
   }
 
   return (
-    <main className="bg-white min-h-screen h-screen w-full flex items-center justify-center bg-[url('https://images6.alphacoders.com/744/744921.png')] bg-bottom md:bg-center bg-contain bg-no-repeat">
-      <section className="bg-slate-100/70 backdrop-blur-md drop-shadow-2xl rounded-md p-6">
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <MdCatchingPokemon className="h-20 w-auto m-auto"/>
-          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
-          </h2>
-        </div>
+    <main className="relative flex-grow w-full min-h-[85vh] flex items-center justify-center p-4 bg-hero-glow overflow-hidden">
+      {/* Decorative Background Orbs */}
+      <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-poke-red/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-poke-cyan/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
-            {/* Campos de Email e Senha */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-gray-500 focus:outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                  Password
-                </label>
-                <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-gray-500 focus:outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </button>
-            </div>
-          </form>
-        </div>
-
-        {/* Botões de Sign in com OAuth */}
-        <div className="inline-flex items-center justify-center w-full my-8">
-            <h3 className="text-center text-base font-semibold text-slate-600 px-2 absolute -translate-x-1/2 left-1/2">
-              Or continue with
-            </h3>
-        </div>
-
-        <div className="flex w-full gap-2">
-          <button 
-            className="flex-1 p-2 flex justify-center rounded-md h-8 bg-slate-700 hover:bg-slate-800"
-            onClick={GithubSignIn}
+      {/* Main Glass Login Card */}
+      <div className="relative w-full max-w-md glass-panel rounded-3xl p-8 border border-white/10 shadow-2xl z-10 text-slate-100 flex flex-col items-center text-center">
+        {/* Back Link */}
+        <div className="w-full flex justify-start mb-4">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors"
           >
-            <FaGithub color="white"/>
+            <ArrowLeft className="w-3.5 h-3.5" /> Voltar ao Início
+          </Link>
+        </div>
+
+        {/* Brand Icon */}
+        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-poke-red to-rose-600 flex items-center justify-center text-white shadow-glow-red mb-4">
+          <Trophy className="w-8 h-8" />
+        </div>
+
+        <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          ENTRAR NO <span className="text-gradient-red">RANKING</span>
+        </h1>
+
+        <p className="text-slate-400 text-sm mt-2 max-w-xs leading-relaxed">
+          Conecte sua conta para garantir 10 votos diários e participar da eleição dos melhores Pokémon.
+        </p>
+
+        {/* Features Bullet */}
+        <div className="my-6 w-full p-4 rounded-2xl bg-slate-900/60 border border-white/5 space-y-2 text-left text-xs text-slate-300">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>Login rápido e 100% seguro com OAuth</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>Contagem de votos renovada a cada 24 horas</span>
+          </div>
+        </div>
+
+        {/* OAuth Buttons */}
+        <div className="w-full space-y-3">
+          <button
+            onClick={handleGithubSignIn}
+            className="w-full py-3.5 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-white/10 text-white font-bold text-sm transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-md"
+          >
+            <FaGithub className="w-5 h-5" />
+            <span>Continuar com GitHub</span>
           </button>
 
-          <button 
-            className="flex-1 p-2 flex justify-center rounded-md h-8 bg-emerald-500 hover:bg-emerald-600"
-            onClick={GoogleSignIn}
-            >
-            <FaGoogle color="white"/>
+          <button
+            onClick={handleGoogleSignIn}
+            className="w-full py-3.5 px-4 rounded-2xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-sm transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-md"
+          >
+            <FaGoogle className="w-5 h-5 text-red-500" />
+            <span>Continuar com Google</span>
           </button>
         </div>
 
+        <p className="text-[11px] text-slate-500 mt-6">
+          Ao entrar, você concorda com as diretrizes da comunidade The Best Pokémon.
+        </p>
       </div>
-      </section>
     </main>
-  )
+  );
 }

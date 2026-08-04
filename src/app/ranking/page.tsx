@@ -1,117 +1,164 @@
+'use client';
 
-'use client'
-import { VotesContext } from "@/src/contexts/RankingContext";
-import { useEffect, useState, useMemo, useCallback } from "react";
-import RankingArticle from "./components/RankingArticle";
-import Heading from "./components/Heading";
-import Link from "next/link";
-import { useSession } from "next-auth/react";
-import GeneralRanking from "./components/GeneralRanking";
-import { IoHome } from "react-icons/io5";
+import { useEffect, useState, useCallback, useMemo } from 'react';
+import Heading from './components/Heading';
+import GeneralRanking from './components/GeneralRanking';
+import RankingArticle from './components/RankingArticle';
+import { POKEMON_TYPES, ALL_TYPE_KEYS } from '@/src/constants/pokemonTypesInfo';
+import { Search, Trophy, RefreshCw } from 'lucide-react';
 
-// Definindo um tipo para os nossos Pokémon vindos da API
 interface RankedPokemon {
   id: number;
   name: string;
   votes: number;
-  // adicione outros campos se necessário
+  types: string[];
 }
 
 export default function Ranking() {
-  const [remainingVotes, setRemainingVotes] = useState<number | null>(null);
-  const { data: session, status } = useSession();
-
-  // Estados para cada lista de ranking
-  const [generalPokemons, setGeneralPokemons] = useState<RankedPokemon[]>([])
-  const [firePokemons, setFirePokemons] = useState<RankedPokemon[]>([])
-  const [grassPokemons, setGrassPokemons] = useState<RankedPokemon[]>([])
-  const [waterPokemons, setWaterPokemons] = useState<RankedPokemon[]>([])
-  const [fairyPokemons, setFairyPokemons] = useState<RankedPokemon[]>([])
-  const [flyingPokemons, setFlyingPokemons] = useState<RankedPokemon[]>([])
-  
+  const [selectedType, setSelectedType] = useState<string>('general');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [pokemons, setPokemons] = useState<RankedPokemon[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const contextValue = useMemo(() => ({
-    remainingVotes,
-    setRemainingVotes
-  }), [remainingVotes]);
-
-  const fetchAllRankings = useCallback(async () => {
-    const fetchRanking = async (endpoint: string) => {
-      try {
-        const response = await fetch(`/api/ranking/${endpoint}`);
-        return await response.json();
-      } catch (error) {
-        console.error(`Erro ao buscar ranking para ${endpoint}:`, error);
-        return []; // Retorna array vazio em caso de erro
+  const fetchRankings = useCallback(async (type: string) => {
+    setIsLoading(true);
+    try {
+      const endpoint = type === 'general' ? '/api/ranking/general' : `/api/ranking/${type}`;
+      const res = await fetch(endpoint);
+      if (res.ok) {
+        const data = await res.json();
+        setPokemons(data);
+      } else {
+        setPokemons([]);
       }
-    };
-
-    const [general, fire, grass, water, fairy, flying] = await Promise.all([
-      fetchRanking('general'),
-      fetchRanking('fire'),
-      fetchRanking('grass'),
-      fetchRanking('water'),
-      fetchRanking('fairy'),
-      fetchRanking('flying'),
-    ]);
-    
-    setGeneralPokemons(general);
-    setFirePokemons(fire);
-    setGrassPokemons(grass);
-    setWaterPokemons(water);
-    setFairyPokemons(fairy);
-    setFlyingPokemons(flying);
+    } catch (error) {
+      console.error(`Erro ao carregar ranking (${type}):`, error);
+      setPokemons([]);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   useEffect(() => {
-    const initialLoad = async () => {
-      setIsLoading(true);
-      await fetchAllRankings();
-      setIsLoading(false);
-    }
-    initialLoad();
+    fetchRankings(selectedType);
+  }, [selectedType, fetchRankings]);
 
-    const fetchUserStatus = async () => {
-      if (status === 'authenticated') {
-        const res = await fetch('/api/user/status');
-        if (res.ok) {
-          const data = await res.json();
-          setRemainingVotes(data.remainingVotes);
-        }
-      }
-    }
-    fetchUserStatus();
-  }, [status, fetchAllRankings]); // Adicione fetchAllRankings à dependência
+  const handleVoteSuccess = useCallback(() => {
+    fetchRankings(selectedType);
+  }, [fetchRankings, selectedType]);
 
-  return(
-    <main className="flex flex-grow flex-col items-center
-    justify-start h-max min-w-full gap-5 py-10 px-4">
-      <VotesContext.Provider value={contextValue}>
-        <Heading/>
-        <section id="rankings" className="flex w-full gap-8 justify-center flex-wrap">
-          {isLoading ? (
-            <p className="text-white text-2xl">Carregando rankings...</p>
-          ) : (
-            <div className="flex flex-wrap gap-10 items-center justify-center">
-              <GeneralRanking pokemonsList={generalPokemons} />
-              <RankingArticle title="Fire Pokemons" pokemonsList={firePokemons} color="bg-red-600" onVoteSuccess={fetchAllRankings}/>
-              <RankingArticle title="Grass Pokemons" pokemonsList={grassPokemons} color="bg-green-700" onVoteSuccess={fetchAllRankings}/>
-              <RankingArticle title="Water Pokemons" pokemonsList={waterPokemons} color="bg-blue-700" onVoteSuccess={fetchAllRankings}/>
-              <RankingArticle title="Fairy Pokemons" pokemonsList={fairyPokemons} color="bg-pink-500" onVoteSuccess={fetchAllRankings}/>
-              <RankingArticle title="Flying Pokemons" pokemonsList={flyingPokemons} color="bg-sky-600" onVoteSuccess={fetchAllRankings}/>
-            </div>
-          )}
-        </section>
-        <Link
-          href='/'
-          className='h-max w-max px-3 sm:px-5 py-1 sm:py-3 my-10 cursor-pointer flex items-center gap-2 text-xl sm:text-2xl font-bold rounded-md bg-white hover:scale-105 hover:bg-slate-100 shadow-md'
-          target='_self'
+  const filteredPokemons = useMemo(() => {
+    if (!searchQuery.trim()) return pokemons;
+    const query = searchQuery.toLowerCase();
+    return pokemons.filter(
+      (p) => p.name.toLowerCase().includes(query) || p.id.toString().includes(query)
+    );
+  }, [pokemons, searchQuery]);
+
+  const showPodium = !searchQuery && filteredPokemons.length >= 3;
+
+  return (
+    <main className="flex-grow w-full max-w-6xl mx-auto px-4 py-8 flex flex-col items-center">
+      {/* Heading & Remaining Votes Banner */}
+      <Heading />
+
+      {/* Type Filter Tabs */}
+      <div className="w-full overflow-x-auto pb-4 scrollbar-none mb-6">
+        <div className="flex items-center gap-2 min-w-max px-2">
+          {/* General Tab */}
+          <button
+            onClick={() => setSelectedType('general')}
+            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider transition-all flex items-center gap-2 border ${
+              selectedType === 'general'
+                ? 'bg-poke-red text-white border-poke-red shadow-glow-red'
+                : 'glass-panel text-slate-300 border-white/10 hover:border-white/20'
+            }`}
+          >
+            <Trophy className="w-4 h-4 text-amber-400" />
+            Ranking Geral
+          </button>
+
+          {/* 18 Type Tabs */}
+          {ALL_TYPE_KEYS.map((key) => {
+            const typeInfo = POKEMON_TYPES[key];
+            const isSelected = selectedType === key;
+            return (
+              <button
+                key={key}
+                onClick={() => setSelectedType(key)}
+                className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 border ${
+                  isSelected
+                    ? `${typeInfo.badgeBg} font-bold shadow-lg scale-105 border-current`
+                    : 'glass-panel text-slate-400 border-white/5 hover:text-slate-200 hover:border-white/15'
+                }`}
+              >
+                <span
+                  className="w-2 h-2 rounded-full"
+                  style={{ backgroundColor: typeInfo.color }}
+                />
+                {typeInfo.nameEn}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Search & Refresh Bar */}
+      <div className="w-full max-w-4xl flex items-center gap-3 mb-8">
+        <div className="relative flex-1">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <input
+            type="text"
+            placeholder="Filtrar por nome ou ID..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 rounded-2xl glass-panel border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-poke-cyan transition-colors"
+          />
+        </div>
+
+        <button
+          onClick={() => fetchRankings(selectedType)}
+          className="p-3 rounded-2xl glass-panel border border-white/10 text-slate-300 hover:text-white hover:border-white/20 transition-colors"
+          title="Atualizar ranking"
         >
-          <IoHome />
-          Homepage
-        </Link>
-      </VotesContext.Provider>
+          <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />
+        </button>
+      </div>
+
+      {/* Loading Skeletons */}
+      {isLoading ? (
+        <div className="w-full max-w-4xl space-y-3 my-8">
+          {[1, 2, 3, 4, 5].map((n) => (
+            <div
+              key={n}
+              className="w-full h-16 rounded-2xl glass-panel border border-white/5 animate-pulse"
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="w-full">
+          {/* Top 3 Podium (Shown when not filtering search) */}
+          {showPodium && (
+            <GeneralRanking
+              pokemonsList={filteredPokemons.slice(0, 3)}
+              onVoteSuccess={handleVoteSuccess}
+            />
+          )}
+
+          {/* List Article for ranks #4+ or full search results */}
+          <RankingArticle
+            title={
+              selectedType === 'general'
+                ? 'Hall da Fama (Demais Posições)'
+                : `Top Pokémon do Tipo ${POKEMON_TYPES[selectedType]?.nameEn || selectedType}`
+            }
+            typeKey={selectedType === 'general' ? '' : selectedType}
+            pokemonsList={showPodium ? filteredPokemons.slice(3) : filteredPokemons}
+            startRank={showPodium ? 4 : 1}
+            onVoteSuccess={handleVoteSuccess}
+          />
+        </div>
+      )}
     </main>
-  )
+  );
 }
