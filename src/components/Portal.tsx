@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState, useEffect, useRef, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
@@ -8,15 +8,18 @@ interface PortalProps {
 }
 
 export default function Portal({ children }: PortalProps) {
-  const ref = useRef<Element | null>(null);
+  const containerRef = useRef<Element | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    
-    ref.current = document.querySelector<HTMLElement>("#modal-root");
+    const modalRoot = document.getElementById('modal-root');
+    containerRef.current = modalRoot || document.body;
     setMounted(true);
   }, []);
 
-  
-  return mounted && ref.current ? createPortal(children, ref.current) : null;
+  if (!mounted || !containerRef.current) {
+    return null;
+  }
+
+  return createPortal(children, containerRef.current);
 }
