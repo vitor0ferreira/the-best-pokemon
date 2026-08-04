@@ -1,3 +1,4 @@
+// @ts-ignore
 import './globals.css';
 import { Outfit } from 'next/font/google';
 import SessionProvider from '../contexts/ServerProvider';
