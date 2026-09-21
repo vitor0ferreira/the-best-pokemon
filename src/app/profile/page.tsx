@@ -108,15 +108,15 @@ export default function Profile() {
   return (
     <main className="flex-grow w-full max-w-6xl mx-auto px-4 py-8 flex flex-col items-center">
       {/* Profile Header Banner */}
-      <div className="w-full glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 mb-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 relative overflow-hidden">
+      <div className="w-full glass-panel rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-white/10 mb-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-poke-cyan/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* User Image */}
-        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-white/20 shadow-xl shrink-0 bg-slate-900 flex items-center justify-center">
+        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-slate-300 dark:border-white/20 shadow-xl shrink-0 bg-slate-200 dark:bg-slate-900 flex items-center justify-center">
           {u.image ? (
             <Image src={u.image} fill alt={u.name} className="object-cover" />
           ) : (
-            <User className="w-12 h-12 text-slate-400" />
+            <User className="w-12 h-12 text-slate-500 dark:text-slate-400" />
           )}
         </div>
 
@@ -126,11 +126,11 @@ export default function Profile() {
             <Shield className="w-3.5 h-3.5" /> {t('profile.officialTrainer')}
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-black text-white">{u.name}</h1>
-          <p className="text-sm text-slate-400 font-mono mt-0.5">{u.email}</p>
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white">{u.name}</h1>
+          <p className="text-sm text-slate-600 dark:text-slate-400 font-mono mt-0.5">{u.email}</p>
 
           <div className="mt-3 flex items-center gap-2">
-            <span className="text-xs text-slate-400 bg-slate-800 px-2.5 py-1 rounded-lg border border-white/5">
+            <span className="text-xs text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/5">
               {t('profile.connectedVia')} <strong>{u.provider}</strong>
             </span>
           </div>
@@ -138,34 +138,34 @@ export default function Profile() {
 
         {/* Remaining Votes Card */}
         <div className="w-full sm:w-auto glass-panel p-5 rounded-2xl border border-amber-400/30 text-center flex flex-col items-center shrink-0 bg-gradient-to-b from-amber-500/10 to-transparent">
-          <span className="text-xs uppercase font-mono text-amber-400 font-bold flex items-center gap-1">
+          <span className="text-xs uppercase font-mono text-amber-600 dark:text-amber-400 font-bold flex items-center gap-1">
             <Sparkles className="w-3.5 h-3.5" /> {t('profile.dailyVotesTitle')}
           </span>
-          <span className="text-3xl font-black text-white font-mono my-1">
-            {u.remainingVotes} <span className="text-sm font-normal text-slate-400">/ 10</span>
+          <span className="text-3xl font-black text-slate-900 dark:text-white font-mono my-1">
+            {u.remainingVotes} <span className="text-sm font-normal text-slate-500 dark:text-slate-400">/ 10</span>
           </span>
-          <span className="text-[11px] text-slate-400">{t('profile.renews24h')}</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400">{t('profile.renews24h')}</span>
         </div>
       </div>
 
       {/* Grid: Favorite & Stats */}
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {/* Total Votes Card */}
-        <div className="glass-panel p-6 rounded-3xl border border-white/10 flex flex-col justify-between">
+        <div className="glass-panel p-6 rounded-3xl border border-slate-200 dark:border-white/10 flex flex-col justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-poke-red/10 border border-poke-red/20 text-poke-red flex items-center justify-center">
               <Trophy className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs font-mono uppercase text-slate-400">{t('profile.totalVotesTitle')}</p>
-              <h3 className="text-2xl font-black text-white font-mono">{u.totalVotes}</h3>
+              <p className="text-xs font-mono uppercase text-slate-500 dark:text-slate-400">{t('profile.totalVotesTitle')}</p>
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white font-mono">{u.totalVotes}</h3>
             </div>
           </div>
-          <p className="text-xs text-slate-400 mt-4">{t('profile.totalVotesDesc')}</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-4">{t('profile.totalVotesDesc')}</p>
         </div>
 
         {/* Favorite Pokemon Card */}
-        <div className="glass-panel p-6 rounded-3xl border border-white/10 md:col-span-2 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="glass-panel p-6 rounded-3xl border border-slate-200 dark:border-white/10 md:col-span-2 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex flex-col text-center sm:text-left">
             <span className="text-xs font-mono uppercase text-poke-gold font-bold flex items-center justify-center sm:justify-start gap-1 mb-1">
               <Heart className="w-4 h-4 text-rose-500 fill-rose-500" /> {t('profile.favoriteTitle')}
@@ -173,7 +173,7 @@ export default function Profile() {
 
             {favorite ? (
               <>
-                <h3 className="text-2xl font-black text-white capitalize">{favorite.name}</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white capitalize">{favorite.name}</h3>
                 <div className="flex gap-1.5 mt-2 justify-center sm:justify-start">
                   {favorite.types?.map((typeStr) => (
                     <Badge key={typeStr} type={typeStr} size="sm" />
@@ -181,7 +181,7 @@ export default function Profile() {
                 </div>
               </>
             ) : (
-              <p className="text-sm text-slate-400 mt-2">{t('profile.noVotesYet')}</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">{t('profile.noVotesYet')}</p>
             )}
           </div>
 
@@ -202,10 +202,10 @@ export default function Profile() {
       </div>
 
       {/* Recent Votes Timeline */}
-      <div className="w-full glass-panel rounded-3xl p-6 sm:p-8 border border-white/10">
-        <div className="flex items-center gap-2 mb-6 border-b border-white/10 pb-3">
+      <div className="w-full glass-panel rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-white/10">
+        <div className="flex items-center gap-2 mb-6 border-b border-slate-200 dark:border-white/10 pb-3">
           <History className="w-5 h-5 text-poke-cyan" />
-          <h2 className="text-xl font-bold text-white">{t('profile.recentHistoryTitle')}</h2>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">{t('profile.recentHistoryTitle')}</h2>
         </div>
 
         {recentVotes.length === 0 ? (
@@ -217,10 +217,10 @@ export default function Profile() {
             {recentVotes.map((v) => (
               <div
                 key={v.id}
-                className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/60 border border-white/5 hover:border-white/15 transition-colors"
+                className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/15 transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <div className="relative w-10 h-10 rounded-xl bg-slate-800 p-1 shrink-0 overflow-hidden">
+                  <div className="relative w-10 h-10 rounded-xl bg-slate-200 dark:bg-slate-800 p-1 shrink-0 overflow-hidden">
                     <Image
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${v.pokemonId}.png`}
                       alt={v.pokemonName}
@@ -232,7 +232,7 @@ export default function Profile() {
                   <div className="flex flex-col">
                     <Link
                       href={`/catalogue/${v.pokemonName}`}
-                      className="font-bold text-white text-sm capitalize hover:text-poke-cyan transition-colors"
+                      className="font-bold text-slate-900 dark:text-white text-sm capitalize hover:text-poke-cyan transition-colors"
                     >
                       {v.pokemonName}
                     </Link>
@@ -244,8 +244,8 @@ export default function Profile() {
                   </div>
                 </div>
 
-                <div className="text-right text-xs font-mono text-slate-400 flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-slate-500" />
+                <div className="text-right text-xs font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                   <span>{new Date(v.createdAt).toLocaleDateString(language === 'pt' ? 'pt-BR' : 'en-US')}</span>
                 </div>
               </div>

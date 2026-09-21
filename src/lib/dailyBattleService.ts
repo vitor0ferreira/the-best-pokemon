@@ -45,10 +45,17 @@ export function getThemeForDateKey(dateKey: string): DailyBattleTheme {
   return DAILY_BATTLE_THEMES[index];
 }
 
+// In-memory cache to prevent re-querying ended battles on every single HTTP GET
+let lastResolvedDateKey: string | null = null;
+
 /**
  * Auto-closes any previous unclosed battles and updates the winner's dailyBattleWins in Pokemon table
  */
 export async function resolveEndedBattles(currentDateKey: string) {
+  if (lastResolvedDateKey === currentDateKey) {
+    return;
+  }
+
   try {
     const unclosedBattles = await prisma.dailyBattle.findMany({
       where: {
@@ -98,6 +105,8 @@ export async function resolveEndedBattles(currentDateKey: string) {
         });
       }
     }
+
+    lastResolvedDateKey = currentDateKey;
   } catch (err) {
     console.error('Error resolving ended battles:', err);
   }

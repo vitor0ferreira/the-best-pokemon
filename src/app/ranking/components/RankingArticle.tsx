@@ -28,7 +28,7 @@ export default function RankingArticle({
   return (
     <div className="w-full max-w-4xl mx-auto flex flex-col gap-3 my-6">
       {/* Category Header Bar */}
-      <div className="flex items-center justify-between px-2 pb-2 border-b border-white/10">
+      <div className="flex items-center justify-between px-2 pb-2 border-b border-slate-200 dark:border-white/10">
         <div className="flex items-center gap-2">
           {typeInfo ? (
             <div
@@ -38,12 +38,12 @@ export default function RankingArticle({
           ) : (
             <Trophy className="w-4 h-4 text-poke-gold" />
           )}
-          <h2 className="text-xl sm:text-2xl font-black text-white capitalize tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white capitalize tracking-tight">
             {title}
           </h2>
         </div>
 
-        <span className="text-xs font-mono text-slate-400">
+        <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
           {t('rankings.pokemonListed', { count: pokemonsList.length })}
         </span>
       </div>

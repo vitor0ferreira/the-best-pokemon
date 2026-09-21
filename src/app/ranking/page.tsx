@@ -82,10 +82,10 @@ export default function Ranking() {
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider transition-all flex items-center gap-2 border ${
               selectedType === 'general'
                 ? 'bg-poke-red text-white border-poke-red shadow-glow-red'
-                : 'glass-panel text-slate-300 border-white/10 hover:border-white/20'
+                : 'glass-panel text-slate-700 dark:text-slate-300 border-slate-300/60 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20'
             }`}
           >
-            <Trophy className="w-4 h-4 text-amber-400" />
+            <Trophy className="w-4 h-4 text-amber-500 dark:text-amber-400" />
             {t('rankings.overallTab')}
           </button>
 
@@ -102,7 +102,7 @@ export default function Ranking() {
                 className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 border ${
                   isSelected
                     ? `${typeInfo.badgeBg} font-bold shadow-lg scale-105 border-current`
-                    : 'glass-panel text-slate-400 border-white/5 hover:text-slate-200 hover:border-white/15'
+                    : 'glass-panel text-slate-600 dark:text-slate-400 border-slate-200 dark:border-white/5 hover:text-slate-900 dark:hover:text-slate-200 hover:border-slate-300 dark:hover:border-white/15'
                 }`}
               >
                 <span
@@ -125,13 +125,13 @@ export default function Ranking() {
             placeholder={t('rankings.searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 rounded-2xl glass-panel border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-poke-cyan transition-colors"
+            className="w-full pl-10 pr-4 py-3 rounded-2xl glass-panel border border-slate-300/60 dark:border-white/10 text-sm text-slate-900 dark:text-white placeholder:text-slate-500 focus:outline-none focus:border-poke-cyan transition-colors"
           />
         </div>
 
         <button
           onClick={() => fetchRankings(selectedType)}
-          className="p-3 rounded-2xl glass-panel border border-white/10 text-slate-300 hover:text-white hover:border-white/20 transition-colors"
+          className="p-3 rounded-2xl glass-panel border border-slate-300/60 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-400 dark:hover:border-white/20 transition-colors"
           title={t('rankings.updateRanking')}
         >
           <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />

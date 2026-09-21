@@ -39,9 +39,9 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
             {/* Pokemon Card */}
             <div
               onClick={() => initiateVote({ id: second.id, name: second.name }, onVoteSuccess)}
-              className="group cursor-pointer w-full glass-panel border border-slate-400/30 hover:border-slate-300 rounded-2xl p-3 sm:p-4 flex flex-col items-center text-center transition-all hover:scale-105 shadow-lg relative overflow-hidden"
+              className="group cursor-pointer w-full glass-panel border border-slate-300/60 dark:border-slate-400/30 hover:border-slate-400 dark:hover:border-slate-300 rounded-2xl p-3 sm:p-4 flex flex-col items-center text-center transition-all hover:scale-105 shadow-lg relative overflow-hidden"
             >
-              <span className="absolute top-2 left-2 w-7 h-7 rounded-full bg-slate-400/20 text-slate-300 font-black text-xs flex items-center justify-center border border-slate-400/40">
+              <span className="absolute top-2 left-2 w-7 h-7 rounded-full bg-slate-200 dark:bg-slate-400/20 text-slate-700 dark:text-slate-300 font-black text-xs flex items-center justify-center border border-slate-300 dark:border-slate-400/40">
                 #2
               </span>
 
@@ -54,7 +54,7 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
                 />
               </div>
 
-              <h3 className="font-extrabold text-white text-sm sm:text-base capitalize truncate w-full mt-1">
+              <h3 className="font-extrabold text-slate-900 dark:text-white text-sm sm:text-base capitalize truncate w-full mt-1">
                 {second.name}
               </h3>
 
@@ -64,18 +64,18 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
                 ))}
               </div>
 
-              <span className="text-xs font-mono font-bold text-slate-300 mt-1">
+              <span className="text-xs font-mono font-bold text-slate-600 dark:text-slate-300 mt-1">
                 {second.votes} {t('rankings.votesLabel')}
               </span>
 
-              <button className="mt-3 w-full py-1 rounded-xl bg-slate-400/20 text-slate-200 group-hover:bg-slate-300 group-hover:text-slate-950 font-bold text-xs transition-colors flex items-center justify-center gap-1">
+              <button className="mt-3 w-full py-1 rounded-xl bg-slate-200 dark:bg-slate-400/20 text-slate-800 dark:text-slate-200 group-hover:bg-slate-300 group-hover:text-slate-950 font-bold text-xs transition-colors flex items-center justify-center gap-1">
                 <Vote className="w-3.5 h-3.5" /> {t('rankings.vote')}
               </button>
             </div>
 
             {/* Podium Base */}
             <div className="w-full h-20 sm:h-28 bg-silver-podium border-t-2 border-slate-400/40 rounded-t-xl flex items-center justify-center text-slate-400 font-black text-2xl sm:text-3xl mt-2">
-              <Award className="w-8 h-8 text-slate-300" />
+              <Award className="w-8 h-8 text-slate-400 dark:text-slate-300" />
             </div>
           </div>
         )}
@@ -83,7 +83,7 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
         {/* #1 FIRST PLACE (GOLD CHAMPION) */}
         {first && (
           <div className="flex flex-col items-center flex-1 max-w-[240px] -translate-y-4">
-            <div className="flex items-center gap-1 text-amber-400 font-bold text-xs uppercase mb-1 animate-bounce">
+            <div className="flex items-center gap-1 text-amber-500 dark:text-amber-400 font-bold text-xs uppercase mb-1 animate-bounce">
               <Crown className="w-4 h-4" /> {t('rankings.champion')}
             </div>
 
@@ -91,7 +91,7 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
               onClick={() => initiateVote({ id: first.id, name: first.name }, onVoteSuccess)}
               className="group cursor-pointer w-full glass-panel border-2 border-amber-400/50 hover:border-amber-300 rounded-3xl p-4 sm:p-5 flex flex-col items-center text-center transition-all hover:scale-105 shadow-glow-gold relative overflow-hidden bg-gradient-to-b from-amber-500/10 to-obsidian-surface"
             >
-              <span className="absolute top-3 left-3 w-8 h-8 rounded-full bg-amber-400 text-obsidian font-black text-sm flex items-center justify-center shadow-lg">
+              <span className="absolute top-3 left-3 w-8 h-8 rounded-full bg-amber-400 text-slate-950 font-black text-sm flex items-center justify-center shadow-lg">
                 #1
               </span>
 
@@ -105,7 +105,7 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
                 />
               </div>
 
-              <h3 className="font-black text-white text-base sm:text-xl capitalize truncate w-full mt-1">
+              <h3 className="font-black text-slate-900 dark:text-white text-base sm:text-xl capitalize truncate w-full mt-1">
                 {first.name}
               </h3>
 
@@ -115,18 +115,18 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
                 ))}
               </div>
 
-              <span className="text-sm font-mono font-bold text-amber-400 mt-1">
+              <span className="text-sm font-mono font-bold text-amber-500 dark:text-amber-400 mt-1">
                 {first.votes} {t('rankings.votesLabel')}
               </span>
 
-              <button className="mt-3 w-full py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-obsidian font-black text-xs sm:text-sm transition-transform shadow-md flex items-center justify-center gap-1.5">
+              <button className="mt-3 w-full py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black text-xs sm:text-sm transition-transform shadow-md flex items-center justify-center gap-1.5">
                 <Vote className="w-4 h-4" /> {t('rankings.voteForChampion')}
               </button>
             </div>
 
             {/* Podium Base */}
-            <div className="w-full h-28 sm:h-36 bg-gold-podium border-t-2 border-amber-400/60 rounded-t-2xl flex items-center justify-center text-amber-400 font-black text-3xl sm:text-4xl mt-2">
-              <Trophy className="w-10 h-10 text-amber-400" />
+            <div className="w-full h-28 sm:h-36 bg-gold-podium border-t-2 border-amber-400/60 rounded-t-2xl flex items-center justify-center text-amber-500 dark:text-amber-400 font-black text-3xl sm:text-4xl mt-2">
+              <Trophy className="w-10 h-10 text-amber-500 dark:text-amber-400" />
             </div>
           </div>
         )}
@@ -138,7 +138,7 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
               onClick={() => initiateVote({ id: third.id, name: third.name }, onVoteSuccess)}
               className="group cursor-pointer w-full glass-panel border border-amber-700/30 hover:border-amber-600 rounded-2xl p-3 sm:p-4 flex flex-col items-center text-center transition-all hover:scale-105 shadow-lg relative overflow-hidden"
             >
-              <span className="absolute top-2 left-2 w-7 h-7 rounded-full bg-amber-700/20 text-amber-500 font-black text-xs flex items-center justify-center border border-amber-700/40">
+              <span className="absolute top-2 left-2 w-7 h-7 rounded-full bg-amber-200/50 dark:bg-amber-700/20 text-amber-700 dark:text-amber-500 font-black text-xs flex items-center justify-center border border-amber-400/40 dark:border-amber-700/40">
                 #3
               </span>
 
@@ -151,7 +151,7 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
                 />
               </div>
 
-              <h3 className="font-extrabold text-white text-sm sm:text-base capitalize truncate w-full mt-1">
+              <h3 className="font-extrabold text-slate-900 dark:text-white text-sm sm:text-base capitalize truncate w-full mt-1">
                 {third.name}
               </h3>
 
@@ -161,18 +161,18 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
                 ))}
               </div>
 
-              <span className="text-xs font-mono font-bold text-amber-600 mt-1">
+              <span className="text-xs font-mono font-bold text-amber-700 dark:text-amber-500 mt-1">
                 {third.votes} {t('rankings.votesLabel')}
               </span>
 
-              <button className="mt-3 w-full py-1 rounded-xl bg-amber-700/20 text-amber-400 group-hover:bg-amber-600 group-hover:text-white font-bold text-xs transition-colors flex items-center justify-center gap-1">
+              <button className="mt-3 w-full py-1 rounded-xl bg-amber-700/20 text-amber-700 dark:text-amber-400 group-hover:bg-amber-600 group-hover:text-white font-bold text-xs transition-colors flex items-center justify-center gap-1">
                 <Vote className="w-3.5 h-3.5" /> {t('rankings.vote')}
               </button>
             </div>
 
             {/* Podium Base */}
-            <div className="w-full h-16 sm:h-24 bg-bronze-podium border-t-2 border-amber-700/40 rounded-t-xl flex items-center justify-center text-amber-600 font-black text-xl sm:text-2xl mt-2">
-              <Award className="w-7 h-7 text-amber-600" />
+            <div className="w-full h-16 sm:h-24 bg-bronze-podium border-t-2 border-amber-700/40 rounded-t-xl flex items-center justify-center text-amber-700 dark:text-amber-600 font-black text-xl sm:text-2xl mt-2">
+              <Award className="w-7 h-7 text-amber-700 dark:text-amber-600" />
             </div>
           </div>
         )}

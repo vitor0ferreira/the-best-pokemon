@@ -110,18 +110,18 @@ export default function PokemonDetailsPage() {
       <div className="w-full flex items-center justify-between mb-6">
         <Link
           href="/catalogue"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors glass-panel px-4 py-2 rounded-xl border border-white/10"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors glass-panel px-4 py-2 rounded-xl border border-slate-300/60 dark:border-white/10"
         >
           <ArrowLeft className="w-4 h-4" /> {t('pokemonDetail.backToPokedex')}
         </Link>
 
-        <span className="font-mono text-sm font-bold text-slate-400">
+        <span className="font-mono text-sm font-bold text-slate-500 dark:text-slate-400">
           #{pokemonData.id.toString().padStart(4, '0')}
         </span>
       </div>
 
       {/* Main Details Card */}
-      <div className="w-full glass-panel rounded-3xl p-6 sm:p-10 border border-white/10 grid grid-cols-1 md:grid-cols-12 gap-8 relative overflow-hidden">
+      <div className="w-full glass-panel rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-white/10 grid grid-cols-1 md:grid-cols-12 gap-8 relative overflow-hidden">
         {/* Ambient Glow */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-poke-red/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -143,8 +143,8 @@ export default function PokemonDetailsPage() {
               onClick={() => setIsShiny(!isShiny)}
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 border ${
                 isShiny
-                  ? 'bg-amber-400/20 text-amber-300 border-amber-400/40 shadow-glow-gold'
-                  : 'bg-slate-800 text-slate-400 border-white/10 hover:text-white'
+                  ? 'bg-amber-400/20 text-amber-600 dark:text-amber-300 border-amber-400/40 shadow-glow-gold'
+                  : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-400 border-slate-300/60 dark:border-white/10 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -156,7 +156,7 @@ export default function PokemonDetailsPage() {
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 border ${
                 isPlayingAudio
                   ? 'bg-poke-cyan/20 text-poke-cyan border-poke-cyan/40 animate-pulse'
-                  : 'bg-slate-800 text-slate-400 border-white/10 hover:text-white'
+                  : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-400 border-slate-300/60 dark:border-white/10 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               <Volume2 className="w-3.5 h-3.5" />
@@ -165,7 +165,7 @@ export default function PokemonDetailsPage() {
           </div>
 
           {/* Title & Types */}
-          <h1 className="text-3xl sm:text-4xl font-black text-white capitalize tracking-tight mt-6">
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white capitalize tracking-tight mt-6">
             {pokemonData.name}
           </h1>
 
@@ -176,16 +176,16 @@ export default function PokemonDetailsPage() {
           </div>
 
           {/* Physical Traits */}
-          <div className="grid grid-cols-2 gap-3 w-full mt-6 text-xs font-mono text-slate-300">
-            <div className="p-3 rounded-2xl bg-slate-900/60 border border-white/5 flex flex-col items-center">
+          <div className="grid grid-cols-2 gap-3 w-full mt-6 text-xs font-mono text-slate-600 dark:text-slate-300">
+            <div className="p-3 rounded-2xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 flex flex-col items-center">
               <span className="text-slate-500 uppercase">{t('pokemonDetail.height')}</span>
-              <span className="font-bold text-white text-base mt-0.5">
+              <span className="font-bold text-slate-900 dark:text-white text-base mt-0.5">
                 {(pokemonData.height / 10).toFixed(1)} m
               </span>
             </div>
-            <div className="p-3 rounded-2xl bg-slate-900/60 border border-white/5 flex flex-col items-center">
+            <div className="p-3 rounded-2xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 flex flex-col items-center">
               <span className="text-slate-500 uppercase">{t('pokemonDetail.weight')}</span>
-              <span className="font-bold text-white text-base mt-0.5">
+              <span className="font-bold text-slate-900 dark:text-white text-base mt-0.5">
                 {(pokemonData.weight / 10).toFixed(1)} kg
               </span>
             </div>
@@ -204,12 +204,12 @@ export default function PokemonDetailsPage() {
         <div className="md:col-span-7 flex flex-col justify-between">
           {/* Base Stats Section */}
           <div>
-            <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-2">
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                <Zap className="w-5 h-5 text-amber-400" /> {t('pokemonDetail.baseStats')}
+            <div className="flex items-center justify-between mb-4 border-b border-slate-200 dark:border-white/10 pb-2">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <Zap className="w-5 h-5 text-amber-500 dark:text-amber-400" /> {t('pokemonDetail.baseStats')}
               </h2>
-              <span className="text-xs font-mono font-bold text-slate-400">
-                {t('pokemonDetail.totalStats')} <strong className="text-amber-400">{totalBaseStats}</strong>
+              <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
+                {t('pokemonDetail.totalStats')} <strong className="text-amber-500 dark:text-amber-400">{totalBaseStats}</strong>
               </span>
             </div>
 
@@ -226,7 +226,7 @@ export default function PokemonDetailsPage() {
 
           {/* Abilities Section */}
           <div className="mt-8">
-            <h2 className="text-xl font-bold text-white flex items-center gap-2 mb-3 border-b border-white/10 pb-2">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3 border-b border-slate-200 dark:border-white/10 pb-2">
               <Shield className="w-5 h-5 text-poke-cyan" /> {t('pokemonDetail.abilities')}
             </h2>
 
@@ -234,12 +234,12 @@ export default function PokemonDetailsPage() {
               {pokemonData.abilities.map((ab) => (
                 <div
                   key={ab.ability.name}
-                  className="px-4 py-2 rounded-xl bg-slate-900/80 border border-white/10 text-sm font-semibold text-slate-200 capitalize flex items-center gap-2"
+                  className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 text-sm font-semibold text-slate-800 dark:text-slate-200 capitalize flex items-center gap-2"
                 >
                   <span className="w-2 h-2 rounded-full bg-poke-cyan" />
                   {ab.ability.name.replace('-', ' ')}
                   {ab.is_hidden && (
-                    <span className="text-[10px] uppercase font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">
+                    <span className="text-[10px] uppercase font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-300">
                       {t('pokemonDetail.hiddenAbility')}
                     </span>
                   )}

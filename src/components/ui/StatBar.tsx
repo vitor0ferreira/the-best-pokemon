@@ -36,11 +36,11 @@ export default function StatBar({ label, value, max = 255 }: StatBarProps) {
 
   return (
     <div className="w-full flex flex-col gap-1 text-xs font-semibold">
-      <div className="flex justify-between items-center text-slate-300">
+      <div className="flex justify-between items-center text-slate-600 dark:text-slate-300">
         <span className="tracking-wider uppercase font-mono">{statName}</span>
-        <span className="font-mono text-white text-sm font-bold tabular-nums">{value}</span>
+        <span className="font-mono text-slate-900 dark:text-white text-sm font-bold tabular-nums">{value}</span>
       </div>
-      <div className="w-full h-2.5 rounded-full bg-slate-900 border border-white/5 overflow-hidden p-0.5 relative">
+      <div className="w-full h-2.5 rounded-full bg-slate-200 dark:bg-slate-900 border border-slate-300/60 dark:border-white/5 overflow-hidden p-0.5 relative">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}

@@ -1,6 +1,7 @@
 import './globals.css';
 import { Outfit } from 'next/font/google';
 import SessionProvider from '../contexts/ServerProvider';
+import { ThemeProvider } from '../contexts/ThemeContext';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import { VoteProvider } from '../contexts/VoteContext';
 import Header from '../components/Header';
@@ -23,18 +24,41 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} font-sans dark`}>
-      <body className="flex flex-col min-h-screen bg-obsidian text-slate-100 selection:bg-poke-red selection:text-white">
+    <html lang="en" className={`${outfit.variable} font-sans dark`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('pokemon_app_theme');
+                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (theme === 'light' || (!theme && !prefersDark)) {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.style.colorScheme = 'light';
+                  } else {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.style.colorScheme = 'dark';
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="flex flex-col min-h-screen bg-obsidian text-slate-900 dark:text-slate-100 selection:bg-poke-red selection:text-white transition-colors duration-200">
         <SessionProvider>
-          <LanguageProvider>
-            <VoteProvider>
-              <Header />
+          <ThemeProvider>
+            <LanguageProvider>
+              <VoteProvider>
+                <Header />
 
-              <div className="flex-grow flex flex-col">{children}</div>
+                <div className="flex-grow flex flex-col">{children}</div>
 
-              <Footer />
-            </VoteProvider>
-          </LanguageProvider>
+                <Footer />
+              </VoteProvider>
+            </LanguageProvider>
+          </ThemeProvider>
         </SessionProvider>
         <div id="modal-root" />
       </body>
