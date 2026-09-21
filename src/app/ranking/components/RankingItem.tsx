@@ -3,8 +3,9 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Vote, ChevronRight } from 'lucide-react';
+import { Vote } from 'lucide-react';
 import { useVoteContext } from '@/src/contexts/VoteContext';
+import { useLanguage } from '@/src/contexts/LanguageContext';
 import Badge from '@/src/components/ui/Badge';
 
 interface RankingItemProps {
@@ -19,6 +20,7 @@ interface RankingItemProps {
 
 function RankingItem({ id, pokemon, rank, votes, types = [], maxVotes = 100, onVoteSuccess }: RankingItemProps) {
   const { initiateVote } = useVoteContext();
+  const { t } = useLanguage();
 
   const votePercentage = maxVotes > 0 ? Math.min(100, Math.round((votes / maxVotes) * 100)) : 0;
 
@@ -77,7 +79,7 @@ function RankingItem({ id, pokemon, rank, votes, types = [], maxVotes = 100, onV
           <span className="font-mono font-bold text-white text-sm sm:text-base tabular-nums">
             {votes}
           </span>
-          <span className="text-[10px] text-slate-400 uppercase font-mono">votos</span>
+          <span className="text-[10px] text-slate-400 uppercase font-mono">{t('rankings.votesLabel')}</span>
         </div>
 
         <button
@@ -85,7 +87,7 @@ function RankingItem({ id, pokemon, rank, votes, types = [], maxVotes = 100, onV
           className="px-3 py-2 rounded-xl bg-poke-red/20 hover:bg-poke-red text-poke-red hover:text-white font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center gap-1.5 shrink-0"
         >
           <Vote className="w-4 h-4" />
-          <span className="hidden sm:inline">Votar</span>
+          <span className="hidden sm:inline">{t('rankings.vote')}</span>
         </button>
       </div>
     </div>

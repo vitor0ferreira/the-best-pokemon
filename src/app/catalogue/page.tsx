@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { ALL_POKEMON_LIST } from '@/src/constants/allPokemonList';
 import PokemonCard from './components/PokemonCard';
-import { Search, BookOpen, Filter, ArrowUpDown } from 'lucide-react';
-import { POKEMON_TYPES, ALL_TYPE_KEYS } from '@/src/constants/pokemonTypesInfo';
+import { Search, BookOpen, ArrowUpDown } from 'lucide-react';
+import { useLanguage } from '@/src/contexts/LanguageContext';
 
 interface PokemonItem {
   name: string;
@@ -12,8 +12,8 @@ interface PokemonItem {
 }
 
 export default function Catalogue() {
+  const { t } = useLanguage();
   const [searchValue, setSearchValue] = useState('');
-  const [selectedType, setSelectedType] = useState<string>('all');
   const [sortOrder, setSortOrder] = useState<'id-asc' | 'id-desc' | 'name-asc'>('id-asc');
 
   const PAGE_SIZE = 36;
@@ -61,9 +61,9 @@ export default function Catalogue() {
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
-  }, [searchValue, selectedType, sortOrder]);
+  }, [searchValue, sortOrder]);
 
-  // Infinite Scroll Observer (Silent, no alerts!)
+  // Infinite Scroll Observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -93,13 +93,13 @@ export default function Catalogue() {
       {/* Page Header */}
       <div className="flex flex-col items-center text-center max-w-2xl mb-8">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-poke-cyan/10 border border-poke-cyan/20 text-poke-cyan text-xs font-bold uppercase tracking-wider mb-3 shadow-glow-cyan">
-          <BookOpen className="w-4 h-4" /> Enciclopédia de Espécies
+          <BookOpen className="w-4 h-4" /> {t('pokedex.badge')}
         </div>
         <h1 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-          POKÉDEX <span className="text-gradient-cyan">NACIONAL</span>
+          {t('pokedex.title')} <span className="text-gradient-cyan">{t('pokedex.titleHighlight')}</span>
         </h1>
         <p className="text-slate-400 text-sm sm:text-base mt-2">
-          Explore todas as espécies cadastradas, consulte estatísticas base e vote nas suas favoritas.
+          {t('pokedex.subtitle')}
         </p>
       </div>
 
@@ -110,7 +110,7 @@ export default function Catalogue() {
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Buscar Pokémon por nome ou ID..."
+            placeholder={t('pokedex.searchPlaceholder')}
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             className="w-full pl-10 pr-4 py-3 rounded-2xl glass-panel border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-poke-cyan transition-colors"
@@ -125,22 +125,27 @@ export default function Catalogue() {
             onChange={(e) => setSortOrder(e.target.value as any)}
             className="w-full sm:w-auto px-4 py-3 rounded-2xl glass-panel border border-white/10 text-sm font-semibold text-slate-200 focus:outline-none focus:border-poke-cyan transition-colors cursor-pointer bg-obsidian-surface"
           >
-            <option value="id-asc">Número Dex (#1 - #1025)</option>
-            <option value="id-desc">Número Dex (#1025 - #1)</option>
-            <option value="name-asc">Nome (A - Z)</option>
+            <option value="id-asc">{t('pokedex.sortDexAsc')}</option>
+            <option value="id-desc">{t('pokedex.sortDexDesc')}</option>
+            <option value="name-asc">{t('pokedex.sortNameAsc')}</option>
           </select>
         </div>
       </div>
 
       {/* Results Count */}
       <div className="w-full flex items-center justify-between px-2 mb-4 text-xs font-mono text-slate-400">
-        <span>Exibindo <strong>{displayedList.length}</strong> de <strong>{processedPokemons.length}</strong> espécies</span>
+        <span>
+          {t('pokedex.displayingCount', {
+            shown: displayedList.length,
+            total: processedPokemons.length,
+          })}
+        </span>
       </div>
 
       {/* Grid of Pokemon Cards */}
       {displayedList.length === 0 ? (
         <div className="w-full py-16 text-center glass-panel rounded-3xl border border-white/10 my-8">
-          <p className="text-slate-400 text-base">Nenhum Pokémon encontrado para &quot;{searchValue}&quot;.</p>
+          <p className="text-slate-400 text-base">{t('pokedex.notFound', { query: searchValue })}</p>
         </div>
       ) : (
         <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
@@ -160,7 +165,7 @@ export default function Catalogue() {
       {/* End of results footer message */}
       {visibleCount >= processedPokemons.length && processedPokemons.length > 0 && (
         <p className="text-xs font-mono text-slate-500 my-8 text-center">
-          ✓ Todos os {processedPokemons.length} Pokémon desta busca foram carregados.
+          {t('pokedex.allLoaded', { count: processedPokemons.length })}
         </p>
       )}
     </main>

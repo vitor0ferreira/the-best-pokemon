@@ -7,11 +7,13 @@ import { useSession, signOut } from 'next-auth/react';
 import { User, LogOut, LogIn, Sparkles, Shield, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useVoteContext } from '@/src/contexts/VoteContext';
+import { useLanguage } from '@/src/contexts/LanguageContext';
 
 export default function DropdownMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session, status } = useSession();
   const { remainingVotes } = useVoteContext();
+  const { t } = useLanguage();
   const menuRef = useRef<HTMLDivElement>(null);
 
   const handleSignOut = async (e: React.MouseEvent) => {
@@ -77,13 +79,13 @@ export default function DropdownMenu() {
             {status === 'authenticated' && user ? (
               <div className="flex flex-col">
                 <div className="px-3 py-2.5 border-b border-white/10 mb-1">
-                  <p className="text-xs text-slate-400 font-medium">Logado como</p>
+                  <p className="text-xs text-slate-400 font-medium">{t('nav.loggedInAs')}</p>
                   <p className="text-sm font-bold text-white truncate">{user.name}</p>
 
                   {remainingVotes !== null && (
                     <div className="mt-2 flex items-center gap-1.5 px-2 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-[11px] font-semibold text-amber-300">
                       <Sparkles className="w-3 h-3 text-amber-400" />
-                      <span>{remainingVotes} voto(s) hoje</span>
+                      <span>{t('nav.votesToday', { count: remainingVotes })}</span>
                     </div>
                   )}
                 </div>
@@ -94,7 +96,7 @@ export default function DropdownMenu() {
                   className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium hover:bg-white/10 hover:text-white transition-colors"
                 >
                   <Shield className="w-4 h-4 text-poke-cyan" />
-                  <span>Meu Perfil & Votos</span>
+                  <span>{t('nav.myProfile')}</span>
                 </Link>
 
                 <button
@@ -102,7 +104,7 @@ export default function DropdownMenu() {
                   className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors mt-1"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>Sair</span>
+                  <span>{t('nav.logout')}</span>
                 </button>
               </div>
             ) : (
@@ -113,7 +115,7 @@ export default function DropdownMenu() {
                   className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-poke-red to-rose-600 hover:from-rose-600 hover:to-poke-red text-white text-sm font-bold transition-all shadow-glow-red"
                 >
                   <LogIn className="w-4 h-4" />
-                  <span>Entrar para Votar</span>
+                  <span>{t('nav.signInToVote')}</span>
                 </Link>
               </div>
             )}

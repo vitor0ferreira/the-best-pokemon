@@ -5,6 +5,7 @@ import Heading from './components/Heading';
 import GeneralRanking from './components/GeneralRanking';
 import RankingArticle from './components/RankingArticle';
 import { POKEMON_TYPES, ALL_TYPE_KEYS } from '@/src/constants/pokemonTypesInfo';
+import { useLanguage } from '@/src/contexts/LanguageContext';
 import { Search, Trophy, RefreshCw } from 'lucide-react';
 
 interface RankedPokemon {
@@ -15,6 +16,7 @@ interface RankedPokemon {
 }
 
 export default function Ranking() {
+  const { t, language } = useLanguage();
   const [selectedType, setSelectedType] = useState<string>('general');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [pokemons, setPokemons] = useState<RankedPokemon[]>([]);
@@ -57,6 +59,15 @@ export default function Ranking() {
 
   const showPodium = !searchQuery && filteredPokemons.length >= 3;
 
+  const articleTitle = useMemo(() => {
+    if (selectedType === 'general') {
+      return showPodium ? t('rankings.hallOfFameOthers') : t('rankings.hallOfFameTop');
+    }
+    const typeObj = POKEMON_TYPES[selectedType];
+    const typeName = language === 'pt' ? typeObj?.namePt : typeObj?.nameEn;
+    return t('rankings.topTypeTitle', { type: typeName || selectedType });
+  }, [selectedType, showPodium, language, t]);
+
   return (
     <main className="flex-grow w-full max-w-6xl mx-auto px-4 py-8 flex flex-col items-center">
       {/* Heading & Remaining Votes Banner */}
@@ -75,13 +86,15 @@ export default function Ranking() {
             }`}
           >
             <Trophy className="w-4 h-4 text-amber-400" />
-            Ranking Geral
+            {t('rankings.overallTab')}
           </button>
 
           {/* 18 Type Tabs */}
           {ALL_TYPE_KEYS.map((key) => {
             const typeInfo = POKEMON_TYPES[key];
             const isSelected = selectedType === key;
+            const typeName = language === 'pt' ? typeInfo.namePt : typeInfo.nameEn;
+
             return (
               <button
                 key={key}
@@ -96,7 +109,7 @@ export default function Ranking() {
                   className="w-2 h-2 rounded-full"
                   style={{ backgroundColor: typeInfo.color }}
                 />
-                {typeInfo.nameEn}
+                {typeName}
               </button>
             );
           })}
@@ -109,7 +122,7 @@ export default function Ranking() {
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Filtrar por nome ou ID..."
+            placeholder={t('rankings.searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-3 rounded-2xl glass-panel border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-poke-cyan transition-colors"
@@ -119,7 +132,7 @@ export default function Ranking() {
         <button
           onClick={() => fetchRankings(selectedType)}
           className="p-3 rounded-2xl glass-panel border border-white/10 text-slate-300 hover:text-white hover:border-white/20 transition-colors"
-          title="Atualizar ranking"
+          title={t('rankings.updateRanking')}
         >
           <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />
         </button>
@@ -147,11 +160,7 @@ export default function Ranking() {
 
           {/* List Article for ranks #4+ or full search results */}
           <RankingArticle
-            title={
-              selectedType === 'general'
-                ? 'Hall da Fama (Demais Posições)'
-                : `Top Pokémon do Tipo ${POKEMON_TYPES[selectedType]?.nameEn || selectedType}`
-            }
+            title={articleTitle}
             typeKey={selectedType === 'general' ? '' : selectedType}
             pokemonsList={showPodium ? filteredPokemons.slice(3) : filteredPokemons}
             startRank={showPodium ? 4 : 1}

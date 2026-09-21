@@ -7,8 +7,8 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import confetti from 'canvas-confetti';
 import { Flame, Clock, Swords, Trophy, CheckCircle2, Vote, Sparkles, AlertCircle } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import Badge from '@/src/components/ui/Badge';
+import { useLanguage } from '@/src/contexts/LanguageContext';
 
 interface Candidate {
   id: number;
@@ -23,7 +23,7 @@ interface BattleData {
   battle: {
     id: string;
     dateKey: string;
-    topic: string;
+    topic: { pt: string; en: string } | string;
     createdAt: string;
   };
   candidates: Candidate[];
@@ -59,6 +59,7 @@ const CANDIDATE_COLORS = [
 export default function DailyBattleSection() {
   const { data: session } = useSession();
   const router = useRouter();
+  const { t, language } = useLanguage();
 
   const [battleData, setBattleData] = useState<BattleData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -161,6 +162,11 @@ export default function DailyBattleSection() {
 
   const { battle, candidates, totalVotes, userVotedPokemonId } = battleData;
 
+  const topicText =
+    typeof battle.topic === 'object' && battle.topic !== null
+      ? battle.topic[language] || battle.topic.pt || battle.topic.en
+      : battle.topic;
+
   return (
     <section className="w-full max-w-6xl px-4 py-8 mx-auto my-6">
       {/* Main Glass Arena Box */}
@@ -176,26 +182,26 @@ export default function DailyBattleSection() {
             </div>
             <div className="flex flex-col">
               <span className="text-xs uppercase font-mono font-bold text-poke-red tracking-widest flex items-center gap-1">
-                <Flame className="w-3.5 h-3.5 fill-poke-red" /> Batalha do Dia • Reseta às 12:00
+                <Flame className="w-3.5 h-3.5 fill-poke-red" /> {t('battle.badge')}
               </span>
-              <span className="text-xs text-slate-400">1 voto independente por treinador</span>
+              <span className="text-xs text-slate-400">{t('battle.subBadge')}</span>
             </div>
           </div>
 
           {/* Countdown Clock Badge */}
           <div className="px-4 py-2 rounded-2xl bg-slate-900/80 border border-white/10 font-mono text-xs sm:text-sm font-bold text-amber-300 flex items-center gap-2 shadow-inner">
             <Clock className="w-4 h-4 text-amber-400 animate-spin-slow" />
-            <span>Encerra em: <strong className="text-white">{formatCountdown(timerSeconds)}</strong></span>
+            <span>{t('battle.endsIn')} <strong className="text-white">{formatCountdown(timerSeconds)}</strong></span>
           </div>
         </div>
 
         {/* Theme Title */}
         <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="text-xs uppercase tracking-widest font-mono text-slate-400 font-bold">
-            Tema do Duelo
+            {t('battle.themeTopic')}
           </span>
           <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1">
-            {battle.topic}
+            {topicText}
           </h2>
         </div>
 
@@ -218,6 +224,9 @@ export default function DailyBattleSection() {
             const isUserVoted = userVotedPokemonId === candidate.id;
             const hasVotedOther = userVotedPokemonId !== null && !isUserVoted;
 
+            const winLabel = candidate.dailyBattleWins === 1 ? t('battle.winSingle') : t('battle.winPlural');
+            const voteLabel = candidate.votes === 1 ? t('battle.voteSingle') : t('battle.votePlural');
+
             return (
               <div
                 key={candidate.id}
@@ -226,7 +235,7 @@ export default function DailyBattleSection() {
                 {/* Wins Badge */}
                 <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-slate-900/80 border border-white/10 text-[11px] font-mono font-bold text-amber-300 flex items-center gap-1 shadow-sm">
                   <Trophy className="w-3 h-3 text-amber-400" />
-                  <span>{candidate.dailyBattleWins} {candidate.dailyBattleWins === 1 ? 'Vitória' : 'Vitórias'}</span>
+                  <span>{candidate.dailyBattleWins} {winLabel}</span>
                 </div>
 
                 {/* Candidate Image */}
@@ -263,7 +272,7 @@ export default function DailyBattleSection() {
                     {candidate.percentage}%
                   </span>
                   <span className="text-xs text-slate-400 font-mono">
-                    {candidate.votes} {candidate.votes === 1 ? 'voto' : 'votos'}
+                    {candidate.votes} {voteLabel}
                   </span>
                 </div>
 
@@ -281,13 +290,13 @@ export default function DailyBattleSection() {
                 >
                   {isUserVoted ? (
                     <>
-                      <CheckCircle2 className="w-4 h-4" /> SEU VOTO REGISTRADO
+                      <CheckCircle2 className="w-4 h-4" /> {t('battle.yourVoteRecorded')}
                     </>
                   ) : hasVotedOther ? (
-                    <span>Votado em outra opção</span>
+                    <span>{t('battle.votedInOther')}</span>
                   ) : (
                     <>
-                      <Vote className="w-4 h-4" /> Votar neste Pokémon
+                      <Vote className="w-4 h-4" /> {t('battle.voteForPokemon')}
                     </>
                   )}
                 </button>
@@ -300,9 +309,9 @@ export default function DailyBattleSection() {
         <div className="max-w-4xl mx-auto glass-panel p-5 rounded-2xl border border-white/10">
           <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
             <span className="font-bold text-white flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-poke-cyan" /> Placar ao Vivo da Comunidade
+              <Sparkles className="w-4 h-4 text-poke-cyan" /> {t('battle.standingsTitle')}
             </span>
-            <span>Total: <strong>{totalVotes}</strong> {totalVotes === 1 ? 'voto' : 'votos'}</span>
+            <span>{t('battle.totalVotes')} <strong>{totalVotes}</strong> {totalVotes === 1 ? t('battle.voteSingle') : t('battle.votePlural')}</span>
           </div>
 
           {/* Segmented Bar */}
@@ -314,7 +323,7 @@ export default function DailyBattleSection() {
                   key={candidate.id}
                   className={`h-full ${colorScheme.bar} transition-all duration-500 relative group`}
                   style={{ width: `${candidate.percentage}%` }}
-                  title={`${candidate.name}: ${candidate.percentage}% (${candidate.votes} votos)`}
+                  title={`${candidate.name}: ${candidate.percentage}% (${candidate.votes})`}
                 />
               );
             })}

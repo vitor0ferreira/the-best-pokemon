@@ -19,12 +19,13 @@ export async function GET() {
       },
     });
 
+    const theme = getThemeForDateKey(dateKey);
+
     if (!battle) {
-      const theme = getThemeForDateKey(dateKey);
       battle = await prisma.dailyBattle.create({
         data: {
           dateKey,
-          topic: theme.topic,
+          topic: theme.topic.pt,
           pokemonIds: theme.pokemonIds,
         },
         include: {
@@ -89,11 +90,13 @@ export async function GET() {
       };
     });
 
+    const bilingualTopic = theme?.topic || { pt: battle.topic, en: battle.topic };
+
     return NextResponse.json({
       battle: {
         id: battle.id,
         dateKey: battle.dateKey,
-        topic: battle.topic,
+        topic: bilingualTopic,
         createdAt: battle.createdAt,
       },
       candidates: candidateStandings,

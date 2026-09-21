@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Trophy, BookOpen, Home as HomeIcon, Sparkles } from 'lucide-react';
+import { Menu, X, Trophy, BookOpen, Home as HomeIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import DropdownMenu from './DropdownMenu';
+import LanguageSelector from './LanguageSelector';
+import { useLanguage } from '../contexts/LanguageContext';
 
 function PokeballIcon({ className = 'w-6 h-6' }: { className?: string }) {
   return (
@@ -21,11 +23,12 @@ function PokeballIcon({ className = 'w-6 h-6' }: { className?: string }) {
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useLanguage();
 
   const navLinks = [
-    { href: '/', label: 'Início', icon: HomeIcon },
-    { href: '/ranking', label: 'Rankings', icon: Trophy },
-    { href: '/catalogue', label: 'Pokédex', icon: BookOpen },
+    { href: '/', label: t('nav.home'), icon: HomeIcon },
+    { href: '/ranking', label: t('nav.rankings'), icon: Trophy },
+    { href: '/catalogue', label: t('nav.pokedex'), icon: BookOpen },
   ];
 
   return (
@@ -72,8 +75,9 @@ export default function Header() {
           })}
         </nav>
 
-        {/* User Dropdown & Mobile Menu Button */}
-        <div className="flex items-center gap-3">
+        {/* User Dropdown, Language Selector & Mobile Menu Button */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          <LanguageSelector />
           <DropdownMenu />
 
           <button

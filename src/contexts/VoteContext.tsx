@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { Sparkles, CheckCircle2, AlertCircle, X, Trophy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Portal from '@/src/components/Portal';
+import { useLanguage } from './LanguageContext';
 
 interface PokemonInfo {
   id: number;
@@ -29,6 +30,7 @@ const VoteContext = createContext<VoteContextType>({
 export function VoteProvider({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const { t } = useLanguage();
 
   const [remainingVotes, setRemainingVotes] = useState<number | null>(null);
   const [selectedPokemon, setSelectedPokemon] = useState<PokemonInfo | null>(null);
@@ -168,17 +170,17 @@ export function VoteProvider({ children }: { children: React.ReactNode }) {
                   </div>
 
                   <h3 className="text-2xl font-black capitalize tracking-tight mt-2">
-                    Votar em <span className="text-gradient-red">{selectedPokemon.name}</span>?
+                    {t('modal.voteConfirmTitle', { name: selectedPokemon.name })}
                   </h3>
 
                   <p className="text-sm text-slate-400 mt-2">
-                    Seu voto ajudará este Pokémon a subir no Ranking Geral e na sua categoria elemental.
+                    {t('modal.voteConfirmDesc')}
                   </p>
 
                   {remainingVotes !== null && (
                     <div className="mt-4 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-amber-300 flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5" />
-                      Votos restantes hoje: <span className="font-bold text-white">{remainingVotes}</span>
+                      <span>{t('modal.votesRemainingToday', { count: remainingVotes })}</span>
                     </div>
                   )}
 
@@ -195,7 +197,7 @@ export function VoteProvider({ children }: { children: React.ReactNode }) {
                       onClick={() => setShowConfirmModal(false)}
                       className="flex-1 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold transition-all disabled:opacity-50"
                     >
-                      Cancelar
+                      {t('modal.cancel')}
                     </button>
                     <button
                       disabled={isSubmitting}
@@ -206,7 +208,7 @@ export function VoteProvider({ children }: { children: React.ReactNode }) {
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                       ) : (
                         <>
-                          <Trophy className="w-4 h-4" /> Confirmar
+                          <Trophy className="w-4 h-4" /> {t('modal.confirm')}
                         </>
                       )}
                     </button>
@@ -239,15 +241,15 @@ export function VoteProvider({ children }: { children: React.ReactNode }) {
                   <CheckCircle2 className="w-7 h-7" />
                 </div>
 
-                <h4 className="text-2xl font-bold text-white capitalize">Voto Computado!</h4>
+                <h4 className="text-2xl font-bold text-white capitalize">{t('modal.voteSuccessTitle')}</h4>
 
                 <p className="text-slate-300 text-sm mt-1">
-                  Você votou com sucesso em <strong className="text-emerald-400 capitalize">{selectedPokemon.name}</strong>.
+                  {t('modal.voteSuccessDesc', { name: selectedPokemon.name })}
                 </p>
 
                 {remainingVotes !== null && (
                   <p className="text-xs text-amber-300 font-medium mt-3 bg-amber-400/10 border border-amber-400/20 px-3 py-1 rounded-full">
-                    Você ainda tem <strong>{remainingVotes}</strong> voto(s) disponível(is) hoje.
+                    {t('modal.votesLeftToday', { count: remainingVotes })}
                   </p>
                 )}
 
@@ -255,7 +257,7 @@ export function VoteProvider({ children }: { children: React.ReactNode }) {
                   onClick={() => setShowSuccessModal(false)}
                   className="mt-6 w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition-all"
                 >
-                  Continuar
+                  {t('modal.continueBtn')}
                 </button>
               </motion.div>
             </div>

@@ -3,6 +3,7 @@
 import React from 'react';
 import RankingItem from './RankingItem';
 import { POKEMON_TYPES } from '@/src/constants/pokemonTypesInfo';
+import { useLanguage } from '@/src/contexts/LanguageContext';
 import { Trophy } from 'lucide-react';
 
 interface ArticleProps {
@@ -20,6 +21,7 @@ export default function RankingArticle({
   startRank = 1,
   onVoteSuccess,
 }: ArticleProps) {
+  const { t } = useLanguage();
   const typeInfo = POKEMON_TYPES[typeKey.toLowerCase()];
   const maxVotes = pokemonsList.length > 0 ? pokemonsList[0].votes : 100;
 
@@ -42,7 +44,7 @@ export default function RankingArticle({
         </div>
 
         <span className="text-xs font-mono text-slate-400">
-          {pokemonsList.length} Pokémon listados
+          {t('rankings.pokemonListed', { count: pokemonsList.length })}
         </span>
       </div>
 
@@ -50,7 +52,7 @@ export default function RankingArticle({
       <div className="flex flex-col gap-2">
         {pokemonsList.length === 0 ? (
           <p className="text-center py-8 text-slate-500 text-sm glass-panel rounded-2xl">
-            Nenhum voto registrado nesta categoria ainda. Seja o primeiro a votar!
+            {t('rankings.emptyList')}
           </p>
         ) : (
           pokemonsList.map((pokemon, idx) => (

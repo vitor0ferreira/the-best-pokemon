@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Crown, Trophy, Award, Vote } from 'lucide-react';
 import { useVoteContext } from '@/src/contexts/VoteContext';
+import { useLanguage } from '@/src/contexts/LanguageContext';
 import Badge from '@/src/components/ui/Badge';
 
 interface RankedPokemon {
@@ -15,6 +16,7 @@ interface RankedPokemon {
 
 export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemonsList: RankedPokemon[]; onVoteSuccess?: () => void }) {
   const { initiateVote } = useVoteContext();
+  const { t } = useLanguage();
 
   if (!pokemonsList || pokemonsList.length === 0) {
     return null;
@@ -27,7 +29,7 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
   return (
     <div className="w-full max-w-4xl mx-auto my-8">
       <h2 className="text-center text-xs uppercase tracking-widest font-mono font-bold text-poke-gold mb-6 flex items-center justify-center gap-2">
-        <Crown className="w-4 h-4" /> Pódio dos 3 Melhores Pokémon
+        <Crown className="w-4 h-4" /> {t('rankings.podiumTitle')}
       </h2>
 
       <div className="flex items-end justify-center gap-3 sm:gap-6 px-2">
@@ -63,11 +65,11 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
               </div>
 
               <span className="text-xs font-mono font-bold text-slate-300 mt-1">
-                {second.votes} Votos
+                {second.votes} {t('rankings.votesLabel')}
               </span>
 
               <button className="mt-3 w-full py-1 rounded-xl bg-slate-400/20 text-slate-200 group-hover:bg-slate-300 group-hover:text-slate-950 font-bold text-xs transition-colors flex items-center justify-center gap-1">
-                <Vote className="w-3.5 h-3.5" /> Votar
+                <Vote className="w-3.5 h-3.5" /> {t('rankings.vote')}
               </button>
             </div>
 
@@ -82,7 +84,7 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
         {first && (
           <div className="flex flex-col items-center flex-1 max-w-[240px] -translate-y-4">
             <div className="flex items-center gap-1 text-amber-400 font-bold text-xs uppercase mb-1 animate-bounce">
-              <Crown className="w-4 h-4" /> Campeão
+              <Crown className="w-4 h-4" /> {t('rankings.champion')}
             </div>
 
             <div
@@ -114,11 +116,11 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
               </div>
 
               <span className="text-sm font-mono font-bold text-amber-400 mt-1">
-                {first.votes} Votos
+                {first.votes} {t('rankings.votesLabel')}
               </span>
 
               <button className="mt-3 w-full py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-obsidian font-black text-xs sm:text-sm transition-transform shadow-md flex items-center justify-center gap-1.5">
-                <Vote className="w-4 h-4" /> Votar no Campeão
+                <Vote className="w-4 h-4" /> {t('rankings.voteForChampion')}
               </button>
             </div>
 
@@ -160,11 +162,11 @@ export default function GeneralRanking({ pokemonsList, onVoteSuccess }: { pokemo
               </div>
 
               <span className="text-xs font-mono font-bold text-amber-600 mt-1">
-                {third.votes} Votos
+                {third.votes} {t('rankings.votesLabel')}
               </span>
 
               <button className="mt-3 w-full py-1 rounded-xl bg-amber-700/20 text-amber-400 group-hover:bg-amber-600 group-hover:text-white font-bold text-xs transition-colors flex items-center justify-center gap-1">
-                <Vote className="w-3.5 h-3.5" /> Votar
+                <Vote className="w-3.5 h-3.5" /> {t('rankings.vote')}
               </button>
             </div>
 
