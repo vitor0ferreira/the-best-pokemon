@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -9,11 +10,11 @@ module.exports = {
     extend: {
       colors: {
         obsidian: {
-          DEFAULT: '#090d16',
-          surface: '#111726',
-          card: '#161e31',
-          border: '#222f47',
-          hover: '#1e293b',
+          DEFAULT: 'var(--bg-main)',
+          surface: 'var(--bg-surface)',
+          card: 'var(--bg-card)',
+          border: 'var(--border-subtle)',
+          hover: 'var(--bg-glass-hover)',
         },
         poke: {
           red: '#ff3366',
@@ -40,37 +41,33 @@ module.exports = {
           dark: '#705848',
           steel: '#b8b8d0',
           fairy: '#ee99ac',
-        }
+        },
       },
       backgroundImage: {
         'pokeball-radial': 'radial-gradient(circle at 50% 30%, rgba(255, 51, 102, 0.15) 0%, rgba(9, 13, 22, 0.95) 70%)',
-        'hero-glow': 'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 242, 254, 0.18), transparent 100%)',
+        'hero-glow': 'radial-gradient(ellipse 80% 50% at 50% -10%, var(--hero-glow-color), transparent 100%)',
         'gold-podium': 'linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(245, 158, 11, 0.05) 100%)',
         'silver-podium': 'linear-gradient(135deg, rgba(148, 163, 184, 0.25) 0%, rgba(148, 163, 184, 0.05) 100%)',
         'bronze-podium': 'linear-gradient(135deg, rgba(217, 119, 6, 0.25) 0%, rgba(217, 119, 6, 0.05) 100%)',
       },
       boxShadow: {
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-        'glow-red': '0 0 25px rgba(255, 51, 102, 0.4)',
-        'glow-cyan': '0 0 25px rgba(0, 242, 254, 0.4)',
-        'glow-gold': '0 0 30px rgba(245, 158, 11, 0.5)',
+        glass: '0 8px 32px 0 rgba(0, 0, 0, 0.15)',
+        'glow-red': '0 0 25px rgba(255, 51, 102, 0.35)',
+        'glow-cyan': '0 0 25px rgba(0, 242, 254, 0.35)',
+        'glow-gold': '0 0 30px rgba(245, 158, 11, 0.45)',
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'marquee': 'marquee 30s linear infinite',
-        'float': 'float 6s ease-in-out infinite',
+        marquee: 'marquee 30s linear infinite',
+        'spin-slow': 'spin 8s linear infinite',
       },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-50%)' },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
-        }
-      }
+      },
     },
   },
   plugins: [],
-}
+};

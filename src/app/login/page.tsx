@@ -6,10 +6,12 @@ import { useEffect } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Trophy, ArrowLeft, ShieldCheck, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { useLanguage } from '@/src/contexts/LanguageContext';
 
 export default function Login() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (status === 'authenticated' && session) {
@@ -47,7 +49,7 @@ export default function Login() {
             href="/"
             className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors"
           >
-            <ArrowLeft className="w-3.5 h-3.5" /> Voltar ao Início
+            <ArrowLeft className="w-3.5 h-3.5" /> {t('login.backHome')}
           </Link>
         </div>
 
@@ -56,23 +58,23 @@ export default function Login() {
           <Trophy className="w-8 h-8" />
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-          ENTRAR NO <span className="text-gradient-red">RANKING</span>
+        <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">
+          {t('login.title')} <span className="text-gradient-red">{t('login.titleHighlight')}</span>
         </h1>
 
         <p className="text-slate-400 text-sm mt-2 max-w-xs leading-relaxed">
-          Conecte sua conta para garantir 10 votos diários e participar da eleição dos melhores Pokémon.
+          {t('login.subtitle')}
         </p>
 
         {/* Features Bullet */}
         <div className="my-6 w-full p-4 rounded-2xl bg-slate-900/60 border border-white/5 space-y-2 text-left text-xs text-slate-300">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-            <span>Login rápido e 100% seguro com OAuth</span>
+            <span>{t('login.benefit1')}</span>
           </div>
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
-            <span>Contagem de votos renovada a cada 24 horas</span>
+            <span>{t('login.benefit2')}</span>
           </div>
         </div>
 
@@ -83,7 +85,7 @@ export default function Login() {
             className="w-full py-3.5 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-white/10 text-white font-bold text-sm transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-md"
           >
             <FaGithub className="w-5 h-5" />
-            <span>Continuar com GitHub</span>
+            <span>{t('login.continueGithub')}</span>
           </button>
 
           <button
@@ -91,12 +93,12 @@ export default function Login() {
             className="w-full py-3.5 px-4 rounded-2xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-sm transition-all hover:scale-[1.02] flex items-center justify-center gap-3 shadow-md"
           >
             <FaGoogle className="w-5 h-5 text-red-500" />
-            <span>Continuar com Google</span>
+            <span>{t('login.continueGoogle')}</span>
           </button>
         </div>
 
-        <p className="text-[11px] text-slate-500 mt-6">
-          Ao entrar, você concorda com as diretrizes da comunidade The Best Pokémon.
+        <p className="text-[11px] text-slate-500 mt-6 max-w-xs">
+          {t('login.terms')}
         </p>
       </div>
     </main>

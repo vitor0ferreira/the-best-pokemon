@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import { POKEMON_TYPES } from '@/src/constants/pokemonTypesInfo';
+import { useLanguage } from '@/src/contexts/LanguageContext';
 import { clsx } from 'clsx';
 
 interface BadgeProps {
@@ -9,12 +12,15 @@ interface BadgeProps {
 }
 
 export default function Badge({ type, size = 'md', className }: BadgeProps) {
+  const { language } = useLanguage();
   const typeKey = type.toLowerCase();
   const info = POKEMON_TYPES[typeKey] || {
     nameEn: type,
     namePt: type,
     badgeBg: 'bg-slate-700 text-slate-300 border-slate-600',
   };
+
+  const displayName = language === 'pt' ? info.namePt : info.nameEn;
 
   const sizeClasses = {
     sm: 'px-2 py-0.5 text-[10px] gap-1 font-medium',
@@ -35,7 +41,7 @@ export default function Badge({ type, size = 'md', className }: BadgeProps) {
         className="w-1.5 h-1.5 rounded-full"
         style={{ backgroundColor: info.color || '#94a3b8' }}
       />
-      {info.nameEn}
+      {displayName}
     </span>
   );
 }
