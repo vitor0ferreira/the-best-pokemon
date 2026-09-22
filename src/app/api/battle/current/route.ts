@@ -62,7 +62,7 @@ export async function GET() {
           votes: true,
         },
       });
-
+ 
       if (!battle) {
         battle = await prisma.dailyBattle.create({
           data: {
